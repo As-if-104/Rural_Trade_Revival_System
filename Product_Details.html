@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Narikel (Coconut)</title>
+  <style>
+    /* Add some basic styling */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .product-container {
+      display: flex;
+      align-items: center;
+      background-color: #f4f4f4;
+      padding: 100px;
+      border-radius: 5px;
+      max-width: 800px;
+      width: 100%;
+      position: relative;
+    }
+
+    .product-image {
+      flex-basis: 40%;
+      max-width: 300px;
+      margin-right: 20px;
+    }
+
+    .product-image img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .product-info {
+      flex-basis: 60%;
+    }
+
+    .product-info h2 {
+      margin-top: 0;
+    }
+
+    .product-info p {
+      margin-bottom: 10px;
+    }
+
+    .price {
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .discount {
+      color: red;
+      font-weight: bold;
+    }
+
+    .buy-button {
+      background-color: #ff5a5f;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .buy-slider {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+    }
+
+    .buy-slider.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .buy-slider-content {
+      background-color: white;
+      padding: 20px;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    .buy-slider-content h3 {
+      margin-top: 0;
+    }
+
+    .buy-slider-content button {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="product-container">
+    <div class="product-image">
+      <img src="narikel-coconut.jpg" alt="Narikel (Coconut)">
+    </div>
+    <div class="product-info">
+      <h2>Narikel (Coconut)</h2>
+      <p class="price">₹139 <span class="discount">(7% OFF)</span></p>
+      <p>Product Weight: 900-1100g</p>
+      <p>Product of Bangladesh</p>
+      <p>Coconut is a very versatile and indispensable food item in South and South-East Asia, used in almost all recipes. It is rich in calories, vitamins, and minerals, and a medium-sized coconut can provide most of the daily-required essential nutrients for an average individual. Coconut water is a refreshing tropical drink.</p>
+      <button class="buy-button" onclick="showBuySlider()">Buy Now</button>
+    </div>
+    <div class="buy-slider">
+      <div class="buy-slider-content">
+        <h3>Add to Cart</h3>
+        <div>
+          <button onclick="hideBuySlider()">Cancel</button>
+          <button onclick="addToCart()">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showBuySlider() {
+      document.querySelector('.buy-slider').classList.add('visible');
+    }
+
+    function hideBuySlider() {
+      document.querySelector('.buy-slider').classList.remove('visible');
+    }
+
+    function addToCart() {
+      // Add logic to add the product to the cart
+      console.log('Product added to cart');
+      hideBuySlider();
+    }
+  </script>
+</body>
+</html>

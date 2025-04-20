@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Cart</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --background-light: #f7f9fc;
+            --text-dark: #2c3e50;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        .cart-container {
+            display: flex;
+            max-width: 1300px;
+            margin: 30px auto;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .product-listing {
+            flex: 2;
+            padding: 40px;
+            background-color: white;
+        }
+        .checkout-sidebar {
+            flex: 1;
+            padding: 40px;
+            background: linear-gradient(135deg, var(--primary-color), #8e44ad);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .checkout-sidebar::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            transform: rotate(-45deg);
+            z-index: 1;
+        }
+        .product-item {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 20px 0;
+            transition: background-color 0.3s ease;
+        }
+        .product-item:hover {
+            background-color: #f9f9f9;
+        }
+        .product-image {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-right: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .product-details {
+            flex-grow: 1;
+        }
+        .product-quantity {
+            display: flex;
+            align-items: center;
+            background-color: #f0f0f0;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        .quantity-btn {
+            background-color: transparent;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .quantity-btn:hover {
+            background-color: rgba(0,0,0,0.1);
+        }
+        .shipping-form input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0 15px;
+            border: 1px solid rgba(255,255,255,0.3);
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .shipping-form input:focus {
+            outline: none;
+            border-color: white;
+            box-shadow: 0 0 10px rgba(255,255,255,0.3);
+        }
+        .total-section {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+        .total-line {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .checkout-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: transform 0.3s ease;
+        }
+        .checkout-btn:hover {
+            transform: scale(1.05);
+        }
+        .delete-btn {
+            background: none;
+            border: none;
+            color: #e74c3c;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="cart-container">
+        <!-- Left Side: Product Listing -->
+        <div class="product-listing">
+            <h1>Your Cart</h1>
+            
+            <div class="product-item" data-price="129.99">
+                <img src="/api/placeholder/120/120" alt="Wireless Headphones" class="product-image">
+                <div class="product-details">
+                    <h3>Wireless Headphones</h3>
+                    <p>Color: Black</p>
+                    <p class="item-price">$129.99</p>
+                </div>
+                <div class="product-quantity">
+                    <button class="quantity-btn decrease">-</button>
+                    <span class="quantity">1</span>
+                    <button class="quantity-btn increase">+</button>
+                </div>
+                <strong class="total-item-price">$129.99</strong>
+                <button class="delete-btn">🗑️</button>
+            </div>
+
+            <div class="product-item" data-price="79.99">
+                <img src="/api/placeholder/120/120" alt="Bluetooth Speaker" class="product-image">
+                <div class="product-details">
+                    <h3>Bluetooth Speaker</h3>
+                    <p>Color: Blue</p>
+                    <p class="item-price">$79.99</p>
+                </div>
+                <div class="product-quantity">
+                    <button class="quantity-btn decrease">-</button>
+                    <span class="quantity">1</span>
+                    <button class="quantity-btn increase">+</button>
+                </div>
+                <strong class="total-item-price">$79.99</strong>
+                <button class="delete-btn">🗑️</button>
+            </div>
+        </div>
+
+        <!-- Right Side: Checkout Sidebar -->
+        <div class="checkout-sidebar">
+            <h2>Checkout Details</h2>
+            
+            <form class="shipping-form">
+                <label>Full Name</label>
+                <input type="text" placeholder="John Doe" required>
+                
+                <label>Delivery Address</label>
+                <input type="text" placeholder="123 Main St" required>
+                
+                <label>City</label>
+                <input type="text" placeholder="Anytown" required>
+                
+                <label>Postal Code</label>
+                <input type="text" placeholder="12345" required>
+            </form>
+
+            <div class="total-section">
+                <div class="total-line">
+                    <span>Subtotal</span>
+                    <span id="subtotal">$209.98</span>
+                </div>
+                <div class="total-line">
+                    <span>Delivery Charge</span>
+                    <span id="delivery-charge">$10.00</span>
+                </div>
+                <div class="total-line">
+                    <span>Discount</span>
+                    <span id="discount">-$10.00</span>
+                </div>
+                <div class="total-line" style="font-weight: bold;">
+                    <span>Total</span>
+                    <span id="total-price">$209.98</span>
+                </div>
+                <button class="checkout-btn">Complete Purchase</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updatePricing() {
+            let subtotal = 0;
+            
+            // Calculate subtotal
+            document.querySelectorAll('.product-item').forEach(item => {
+                const price = parseFloat(item.dataset.price);
+                const quantity = parseInt(item.querySelector('.quantity').textContent);
+                const totalItemPrice = price * quantity;
+                
+                item.querySelector('.total-item-price').textContent = `$${totalItemPrice.toFixed(2)}`;
+                subtotal += totalItemPrice;
+            });
+
+            const deliveryCharge = 10.00;
+            const discount = 10.00;
+            const total = subtotal + deliveryCharge - discount;
+
+            // Update total sections
+            document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
+            document.getElementById('total-price').textContent = `$${total.toFixed(2)}`;
+        }
+
+        // Quantity and Pricing Event Listeners
+        document.querySelectorAll('.product-item').forEach(item => {
+            const decreaseBtn = item.querySelector('.decrease');
+            const increaseBtn = item.querySelector('.increase');
+            const quantitySpan = item.querySelector('.quantity');
+            const deleteBtn = item.querySelector('.delete-btn');
+
+            decreaseBtn.addEventListener('click', () => {
+                let quantity = parseInt(quantitySpan.textContent);
+                if (quantity > 1) {
+                    quantity--;
+                    quantitySpan.textContent = quantity;
+                    updatePricing();
+                }
+            });
+
+            increaseBtn.addEventListener('click', () => {
+                let quantity = parseInt(quantitySpan.textContent);
+                quantity++;
+                quantitySpan.textContent = quantity;
+                updatePricing();
+            });
+
+            deleteBtn.addEventListener('click', () => {
+                item.remove();
+                updatePricing();
+            });
+        });
+
+        // Initial pricing calculation
+        updatePricing();
+
+        // Checkout button
+        document.querySelector('.checkout-btn').addEventListener('click', function() {
+            alert('Thank you for your purchase! Order processing...');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/jpg" href="Images/Diamond.jpg">
+    <title>Dairy and Eggs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="DirectMart.css">
+    <link rel="stylesheet" href="ChatBot.css">
+    <!-- <link rel="stylesheet" href="Sell.css"> -->
+
+    <style>
+        .categories {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 20px auto;
+            flex-wrap: wrap;
+        }
+
+        .category-item {
+            text-align: center;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .category-item img {
+            width: 160px;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .category-item p {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .category-item:hover {
+            transform: scale(1.05);
+        }
+
+        .cart-summary {
+            position: fixed;
+            right: 30px;
+            top: 150px;
+            background-color: #f4f4f4;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .cart-summary span {
+            font-size: 14px;
+            color: #333;
+        }
+
+        .cart-summary p {
+            margin: 5px 0 0;
+            font-weight: bold;
+            font-size: 18px;
+            color: #000;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="navbar">
+            <div class="nav-logo border">
+                <i class="fa-solid fa-diamond"></i>
+                <div class="logo"><a href="DirectMart.html" style="text-decoration: none; color: white;">DirectMart</a></div>
+            </div>
+
+            <div class="nav-add border">
+                <div class="add-first">Deliver to</div>
+                <div class="add-second">
+                    <i class="fa-solid fa-location-dot"></i>
+                    Bangladesh
+                </div>
+            </div>
+            <div class="language border">
+                <div class="flag-icon">
+                    <i class="fa-solid fa-flag"></i>
+                    <select class="choose_lang">
+                        <option>EN</option>
+                        <option>Ban</option>
+                        <option>ES</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="nav-signIn border" id="click">
+                <a href="register.html">
+                    <div class="hello-signIn">Hello, sign in</div>
+                    <div class="account-signIn">Account and Lists</div>
+                </a>
+            </div>
+
+            <div class="nav-cart border">
+                <button id="cartButton">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <a href="MyCart.html" style="text-decoration: none; font-size: 15px;"> My Cart </a>
+            </div>
+
+            <div id="cartModal" class="cart-modal">
+                <div class="cart-modal-content">
+                    <span class="cart-close-button">&times;</span>
+                    <h2>Your Cart</h2>
+                    <div id="cartItems">
+                        <!-- Cart items will be dynamically added here -->
+                    </div>
+                    <div class="cart-summary">
+                        <p>Total: ৳<span id="cartTotal">0</span></p>
+                        <button id="checkoutButton">Checkout</button>
+                    </div>
+                </div>
+            </div>
+            <script src="AddToCart.js"></script>
+
+            <div class="Profile_pic">
+                <a href="UserDashBoard.html"><img src="Images/ProfileImage.png"></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="all">
+            <a href="#">
+            <i class="fa-solid fa-bars"></i>
+            Menu
+            </a>
+        </div>
+
+        <div class="overlay"></div>
+    
+         <nav class="sidebar">
+            <div class="menu-header">Rural Trade Categories</div>
+            
+            <div class="menu-section">
+                <ul>
+                    <li class="sub-menu" style="margin-left: -50px; margin-top: -21px">
+                        <a style="font-size: large; font-weight: bold;">Agricultural Products</a>
+                        <div class="sub-menu-content">
+                            <ul>
+                                <a>Seasonal Crops</a>
+                                <div class="sub-menu-content-content">
+                                    <ul>
+                                        <li><a href="#">Summer Corps</a></li>
+                                        <li><a href="#">Winter Corps</a></li>
+                                        <li><a href="#">Monsoon Corps</a></li>
+                                    </ul>
+                                </div>
+
+                                <a>Fresh Fish and Meat</a>
+                                <div class="sub-menu-content-content">
+                                    <ul>
+                                        <li><a href="#">Freshwater Fish</a></li>
+                                        <li><a href="#">Sea Fish</a></li>
+                                    </ul>
+                                </div>
+
+                                <a>Dairy and Eggs</a>
+                                <div class="sub-menu-content-content">
+                                    <ul>
+                                        <li><a href="#">Vegetable Oil</a></li>
+                                        <li><a href="#">Pulses</a></li>
+                                        <li><a href="#">Sugarcane</a></li>
+                                    </ul>
+                                </div>
+
+                                
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="menu-section">
+                <ul>
+                    <li class="sub-menu" style="margin-left: -50px; margin-top: -21px">
+                        <a style="font-size: large; font-weight: bold;">HandCraft</a>
+                        <div class="sub-menu-content">
+                            <ul>
+                                <li class="sub-menu"><a>Clothes</a>
+                                    <ul>
+                                        <div class="sub-menu-content-content">
+                                            <ul>
+                                                <li><a href="#">Men's Clothing</a></li>
+                                                <li><a href="#">Women's Clothing</a></li>
+                                                <li><a href="#">Kids' Clothing</a></li>
+                                            </ul>
+                                        </div>
+                                    </ul>
+                                </li>
+                                <a>Pottery</a>
+                                <div class="sub-menu-content-content">
+                                    <ul>
+                                        <li><a href="#">Vases</a></li>
+                                        <li><a href="#">Bowls</a></li>
+                                        <li><a href="#">Jewelry</a></li>
+                                    </ul>
+                                </div>
+
+                                <a>Traditional Art</a>
+                                <div class="sub-menu-content-content">
+                                    <ul>
+                                        <li><a href="#">Painting</a></li>
+                                        <li><a href="#">Metal Crafts</a></li>
+                                        <li><a href="#">Weaving</a></li>
+                                    </ul>
+                                </div>
+
+                               
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div> 
+            
+            <div class="menu-section">
+                <ul>
+                    <li class="sub-menu" style="margin-left: -50px; margin-top: -21px">
+                        <a style="font-size: large; font-weight: bold;">Local Services</a>
+                        <div class="sub-menu-content">
+                            <ul>
+                                <a>Transportation</a>
+                                <div class="sub-menu-content-content">
+                                    <ul>
+                                        <li><a href="#">Public Transportation</a></li>
+                                        <li><a href="#">Private Transportation</a></li>
+                                    </ul>
+                                </div>
+
+                                <a>Warehouse Facilities</a>
+                                <div class="sub-menu-content-content">
+                                    <ul>
+                                        <li><a href="#">Warehouses</a></li>
+                                        <li><a href="#">Shipping Facilities</a></li>
+                                        <li><a href="#">Logistics</a></li>
+                                    </ul>
+                                </div>
+
+                                <a>Catering</a>
+                                <div class="sub-menu-content-content">
+                                    <ul>
+                                        <li><a href="#">Catering Services</a></li>
+                                        <li><a href="#">Dining</a></li>
+                                    </ul>
+                                </div>
+
+                                
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            
+             
+            <div class="menu-section">
+                <ul>
+                    <li class="sub-menu" style="margin-left: -50px; margin-top: -21px">
+                        <a style="font-size: large; font-weight: bold;">Help & Settings</a>
+                        <div class="sub-menu-content">
+                            <ul>
+                                <li><a href="#">Your Account</a></li>
+                                <li><a href="#">Customer Service</a></li>
+                                <li><a href="#">Sign in</a></li>
+                                <li><a href="#">Contact Us</a></li>
+                                <br><br>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div> 
+        </nav> 
+
+        <script>
+            const menuTrigger = document.querySelector('.all');
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.querySelector('.overlay');
+            const subMenus = document.querySelectorAll('.sub-menu');
+
+            menuTrigger.addEventListener('click', () => {
+                sidebar.classList.add('active');
+                overlay.classList.add('active');
+            });
+
+            overlay.addEventListener('click', () => {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+            });
+
+            subMenus.forEach(menu => {
+                menu.addEventListener('click', (e) => {
+                    if (e.target.tagName === 'A') {
+                        e.preventDefault();
+                        menu.classList.toggle('active');
+                    }
+                });
+            });
+
+            document.addEventListener('DOMContentLoaded', function() {
+                const mainMenu = document.querySelector('.main-menu');
+                mainMenu.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    this.classList.toggle('active');
+                });
+
+                const subMenus = document.querySelectorAll('.sub-menu');
+                subMenus.forEach(menu => {
+                    menu.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        this.classList.toggle('active');
+                    });
+                });
+
+                const subMenuContents = document.querySelectorAll('.sub-menu-content');
+                subMenus.forEach(menu => {
+                    menu.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        this.classList.toggle('active');
+                    });
+                });
+            });
+
+            const menuItems = document.querySelectorAll('.menu-section li');
+            menuItems.forEach((item, index) => {
+                item.style.transitionDelay = `${index * 0.015}s`;
+            });
+        </script>
+
+        <div class="panel-ops">
+            <!-- <a href="#">Today's Deals</a> -->
+            <a href="Review.html">Customer Review</a>
+            <!-- <a href="#">Returns & Orders</a>
+            <a href="#">Gift Cards</a> -->
+            <!-- <a href="Sell.html">Sell</a> -->
+             <a href="Filtering.html">Product Sell</a>
+        </div>
+
+        <div class="plus"> <a href="#">
+            HelpLine
+            <i class="fa-solid fa-plus"></i>
+            </a>
+        </div>
+    </div>
+
+    <div>
+        <h1 style="margin-top: 30px; margin-left: 690px; color: hsl(0, 4%, 37%); font-family: 'Times New Roman', Times, serif;">Dairy and Eggs</h1>
+        <div class="shoping" style="cursor: pointer; margin-top: 50px; margin-left: 40px; font-family: 'Times New Roman', Times, serif;">
+            <div class="categories">
+                <div class="category-item" data-price="250">
+                    <img src="Images/Egg.png" style="height: 200px; width: 200px;" alt="Chicken & Poultry">
+                    <a href="Egg.html" style="text-decoration: none;"><p style="font-size: larger;">Eggs</p></a>
+                </div>
+                <div class="category-item" data-price="300">
+                    <img src="Images/milk.png" style="height: 200px; width: 250px;" alt="Premium Perishables">
+                    <a href="chess.html" style="text-decoration: none;"><p style="font-size: larger;">Condensed Milk & Cream</p></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="chatbot-icon" onclick="toggleChatBox()">
+            <span class="message-icon">💬</span>
+        </div>
+
+        <div class="chat-support-container" id="chatSupportContainer" style="display: none;">
+            <div class="chat-header">
+                চ্যাট বক্স
+                <button class="close-btn" id="closeBtn">&times;</button>
+                <script>
+                    document.getElementById('closeBtn').addEventListener('click', function() {
+                    document.getElementById('chatSupportContainer').style.display = 'none';
+                    });
+                </script>
+            </div>
+            <div class="chat-body" id="chatBody">
+                
+            </div>
+            <div class="chat-footer">
+                <input type="text" id="chatInput" placeholder="আপনার বার্তা লিখুন..." />
+                <button onclick="sendMessage()" style="padding: 10px;">পাঠান</button>
+            </div>
+        </div>
+
+        <script src="ChatBot.js"></script>
+    </div>
+
+    <div class="cart-summary">
+        <span>🛒 <strong id="item-count">0</strong> ITEMS</span>
+        <a href="MyCart.html" style="text-decoration: none;"><p>Total: ৳ <span id="total-price">0</span></p></a>
+    </div>
+</body>
+</html>

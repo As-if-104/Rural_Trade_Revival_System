@@ -1,0 +1,136 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    height: 100vh;
+    background-color: #f4f7fc;
+}
+
+.dashboard {
+    display: flex;
+    width: 100%;
+}
+
+.sidebar {
+    width: 250px;
+    height: 1000px;
+    background-color: #2c3e50;
+    padding: 20px;
+    color: #ecf0f1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.sidebar h2 {
+    text-align: center;
+    font-size: 22px;
+    color: #ecf0f1;
+}
+
+.menu {
+    list-style: none;
+}
+
+.menu li {
+    margin: 60px 0;
+}
+
+.menu li a {
+    text-decoration: none;
+    color: #ecf0f1;
+    font-size: 18px;
+    padding: 15px;
+    border-radius: 8px;
+    display: block;
+    transition: background 0.3s;
+}
+
+.menu li a i {
+    margin-right: 10px;
+}
+
+.menu li a:hover, .menu li a.active {
+    background-color: #34495e;
+}
+
+
+.market-insights {
+    margin-top: 40px;
+    padding-left: 220px;
+    padding-right: 220px;
+}
+
+.market-insights h1 {
+    margin-bottom: 40px;
+    color: #0682fe;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+    font-size: 30px;
+}
+
+.insight {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.insight h3 {
+    color: #34495e;
+}
+
+.insight p {
+    color: #7f8c8d;
+}
+
+@media (max-width: 768px) {
+    .cards {
+        flex-direction: column;
+    }
+}
+
+div button{
+    margin-top: 10px;
+    padding: 10px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.view-more{
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    margin-right: 67%;
+}
+
+.see-all{
+    background-color: #5cef12;
+    color: white;
+    border: none;
+    font-size: 15px;
+}
+
+div button:hover{
+    background-color: #f7ca00;
+}
+
+.insight a{
+    color: #0682fe;
+    text-decoration: none;
+}
+
+.insight a:hover{
+    color: #3498db;
+}
+

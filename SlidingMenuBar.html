@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sliding Sidebar Menu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 300px;
+            height: 100vh;
+            background: #2c3e50;
+            overflow: hidden;
+        }
+
+        .menu {
+            position: absolute;
+            top: 0;
+            left: -300px;
+            width: 300px;
+            height: 100%;
+            padding: 20px;
+            background: #2c3e50;
+            transition: left 0.3s ease-in-out;
+        }
+
+        .menu.active {
+            left: 0;
+        }
+
+        .menu-title {
+            color: #ecf0f1;
+            font-size: 24px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            cursor: pointer;
+            color: #ecf0f1;
+            background: #34495e;
+            margin-bottom: 8px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-item:hover {
+            background: #3498db;
+            transform: translateX(5px);
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            color: #3498db;
+            font-weight: bold;
+        }
+
+        .back-btn:hover {
+            color: #2980b9;
+        }
+
+        .arrow {
+            margin-left: 10px;
+        }
+
+        /* Link styles */
+        .menu-item.link {
+            text-decoration: none;
+            background: #2980b9;
+        }
+
+        .menu-item.link:hover {
+            background: #3498db;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <!-- Main Menu -->
+        <div class="menu active" id="main-menu">
+            <h2 class="menu-title">Main Menu</h2>
+            <div class="menu-item" onclick="showMenu('agricultural-menu')">
+                Agricultural Products
+                <span class="arrow">→</span>
+            </div>
+            <div class="menu-item" onclick="showMenu('handicraft-menu')">
+                Handicraft Products
+                <span class="arrow">→</span>
+            </div>
+            <div class="menu-item">
+                Settings
+                <span class="arrow">→</span>
+            </div>
+        </div>
+
+        <!-- Agricultural Products Menu -->
+        <div class="menu" id="agricultural-menu">
+            <div class="back-btn" onclick="goBack('agricultural-menu')">
+                ← Back
+            </div>
+            <h2 class="menu-title">Agricultural Products</h2>
+            <div class="menu-item" onclick="showMenu('seasonal-menu')">
+                Seasonal Crops and Fruit
+                <span class="arrow">→</span>
+            </div>
+            <div class="menu-item" onclick="showMenu('meat-menu')">
+                Fresh Meat and Fisheries
+                <span class="arrow">→</span>
+            </div>
+            <div class="menu-item" onclick="showMenu('dairy-menu')">
+                Dairy & Eggs
+                <span class="arrow">→</span>
+            </div>
+        </div>
+
+        <!-- Seasonal Crops Menu -->
+        <div class="menu" id="seasonal-menu">
+            <div class="back-btn" onclick="goBack('seasonal-menu')">
+                ← Back
+            </div>
+            <h2 class="menu-title">Seasonal Crops</h2>
+            <a href="#" class="menu-item link">Rainy Crops</a>
+            <a href="#" class="menu-item link">Summer Crops</a>
+            <a href="#" class="menu-item link">Winter Crops</a>
+            <a href="#" class="menu-item link">Fresh Fruits</a>
+        </div>
+
+        <!-- Meat Menu -->
+        <div class="menu" id="meat-menu">
+            <div class="back-btn" onclick="goBack('meat-menu')">
+                ← Back
+            </div>
+            <h2 class="menu-title">Meat & Fisheries</h2>
+            <a href="#" class="menu-item link">Chicken & Poultry</a>
+            <a href="#" class="menu-item link">Fresh Meat</a>
+            <a href="#" class="menu-item link">Fresh Fish</a>
+        </div>
+
+        <!-- Dairy Menu -->
+        <div class="menu" id="dairy-menu">
+            <div class="back-btn" onclick="goBack('dairy-menu')">
+                ← Back
+            </div>
+            <h2 class="menu-title">Dairy & Eggs</h2>
+            <a href="#" class="menu-item link">Eggs</a>
+            <a href="#" class="menu-item link">Condensed Milk</a>
+        </div>
+
+        <!-- Handicraft Menu -->
+        <div class="menu" id="handicraft-menu">
+            <div class="back-btn" onclick="goBack('handicraft-menu')">
+                ← Back
+            </div>
+            <h2 class="menu-title">Handicraft Products</h2>
+            <a href="#" class="menu-item link">Textiles</a>
+            <a href="#" class="menu-item link">Pottery</a>
+        </div>
+    </div>
+
+    <script>
+        const menuHistory = ['main-menu'];
+
+        function showMenu(menuId) {
+            // Hide current menu
+            document.querySelector('.menu.active').classList.remove('active');
+            
+            // Show new menu
+            document.getElementById(menuId).classList.add('active');
+            
+            // Add to history
+            menuHistory.push(menuId);
+        }
+
+        function goBack(currentMenuId) {
+            if (menuHistory.length > 1) {
+                // Remove current menu from history
+                menuHistory.pop();
+                
+                // Hide current menu
+                document.getElementById(currentMenuId).classList.remove('active');
+                
+                // Show previous menu
+                const previousMenuId = menuHistory[menuHistory.length - 1];
+                document.getElementById(previousMenuId).classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>

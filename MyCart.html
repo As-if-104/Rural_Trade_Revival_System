@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rural Trade Marketplace Cart</title>
+    <style>
+        :root {
+            --primary-green: #2ecc71;
+            --secondary-green: #27ae60;
+            --background-light: #f0f4f8;
+            --text-dark: #2c3e50;
+            --accent-orange: #e67e22;
+            --soft-shadow: rgba(0,0,0,0.1);
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Nunito', 'Segoe UI', sans-serif;
+            background-color: var(--background-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        .rural-cart-container {
+            display: flex;
+            max-width: 1400px;
+            margin: 30px auto;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px var(--soft-shadow);
+            overflow: hidden;
+        }
+        .product-listing {
+            flex: 2.5;
+            padding: 40px;
+            background-color: white;
+            border-right: 2px solid #f1f3f5;
+        }
+        .product-listing h1 {
+            color: var(--secondary-green);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .product-listing h1 svg {
+            margin-right: 15px;
+        }
+        .product-item {
+            display: flex;
+            align-items: center;
+            background-color: #f9fafb;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            border: 2px solid transparent;
+        }
+        .product-item:hover {
+            border-color: var(--primary-green);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+        .product-image {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-right: 25px;
+            box-shadow: 0 10px 20px var(--soft-shadow);
+        }
+        .product-details {
+            flex-grow: 1;
+        }
+        .product-details h3 {
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+        .product-details .product-meta {
+            color: #6c757d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            background-color: #f1f3f5;
+            border-radius: 30px;
+            padding: 5px;
+            margin-right: 20px;
+        }
+        .quantity-btn {
+            background-color: transparent;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .quantity-btn:hover {
+            background-color: var(--primary-green);
+            color: white;
+        }
+        .product-price {
+            font-weight: bold;
+            color: var(--accent-orange);
+            margin-left: 20px;
+        }
+        .checkout-sidebar {
+            flex: 1.5;
+            padding: 40px;
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .total-section {
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        .total-line {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+        .checkout-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--accent-orange);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            margin-top: 20px;
+        }
+        .checkout-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .rural-tag {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--accent-orange);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8em;
+        }
+        .delete-btn {
+            background: none;
+            border: none;
+            color: #e74c3c;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="rural-cart-container">
+        <div class="product-listing">
+            <h1>
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <path d="M16 10a4 4 0 0 1-8 0"></path>
+                </svg>
+                Rural Trade Marketplace Cart
+            </h1>
+            
+            <div class="product-item">
+                <img src="Images/angur.png" alt="Organic Rice" class="product-image">
+                <div class="product-details">
+                    <h3>আঙ্গুর</h3>
+                    <div class="product-meta">
+                        <p>Local Farmer Produce | 1 KG Pack</p>
+                        <p>From: Rajshahi Agricultural Cooperative</p>
+                    </div>
+                    <div class="product-actions">
+                        <div class="quantity-control">
+                            <button class="quantity-btn decrease">-</button>
+                            <span class="quantity">1</span>
+                            <button class="quantity-btn increase">+</button>
+                        </div>
+                        <span class="product-price">390Taka</span>
+                        <button class="delete-btn">🗑️</button>
+                    </div>
+                </div>
+                <div class="rural-tag">Local Produce</div>
+            </div>
+
+            <div class="product-item">
+                <img src="Images/beafBone.png" alt="Honey" class="product-image">
+                <div class="product-details">
+                    <h3>গরুর মাংস+হাড্ডি</h3>
+                    <div class="product-meta">
+                        <p>Local Farmer Produce | 500g</p>
+                        <p>From: Local Trade</p>
+                    </div>
+                    <div class="product-actions">
+                        <div class="quantity-control">
+                            <button class="quantity-btn decrease">-</button>
+                            <span class="quantity">1</span>
+                            <button class="quantity-btn increase">+</button>
+                        </div>
+                        <span class="product-price">450Taka</span>
+                        <button class="delete-btn">🗑️</button>
+                    </div>
+                </div>
+                <div class="rural-tag">Local Produce</div>
+            </div>
+
+            <div class="product-item">
+                <img src="Images/chompaKola.png" alt="Honey" class="product-image">
+                <div class="product-details">
+                    <h3>চম্পাকলা</h3>
+                    <div class="product-meta">
+                        <p>Local Farmer Produce | 12pc</p>
+                        <p>From: Local Trade</p>
+                    </div>
+                    <div class="product-actions">
+                        <div class="quantity-control">
+                            <button class="quantity-btn decrease">-</button>
+                            <span class="quantity">1</span>
+                            <button class="quantity-btn increase">+</button>
+                        </div>
+                        <span class="product-price">120Taka</span>
+                        <button class="delete-btn">🗑️</button>
+                    </div>
+                </div>
+                <div class="rural-tag">Local Produce</div>
+            </div>
+        </div>
+        
+
+        <div class="checkout-sidebar">
+            <h2>Order Summary</h2>
+            
+            <div class="total-section">
+                <div class="total-line">
+                    <span>Subtotal</span>
+                    <span id="subtotal">960Tk</span>
+                </div>
+                <div class="total-line">
+                    <span>Delivery Charge</span>
+                    <span id="delivery-charge">10Tk</span>
+                </div>
+                <div class="total-line" style="border-bottom: none; font-weight: bold;">
+                    <span>Total</span>
+                    <span id="total-price">970Tk</span>
+                </div>
+                <a href="OrderPlace.html" style="text-decoration: none;"><button class="checkout-btn">Checkout your order</button></a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updatePricing() {
+            let subtotal = 0;
+            
+            document.querySelectorAll('.product-item').forEach(item => {
+                const priceElement = item.querySelector('.product-price');
+                const quantitySpan = item.querySelector('.quantity');
+                const price = parseFloat(priceElement.textContent.replace('Tk', ''));
+                const quantity = parseInt(quantitySpan.textContent);
+                
+                const totalItemPrice = price * quantity;
+                subtotal += totalItemPrice;
+            });
+
+            const deliveryCharge = 3.00;
+            const total = subtotal + deliveryCharge;
+
+            document.getElementById('subtotal').textContent = `Tk${subtotal.toFixed(2)}`;
+            document.getElementById('total-price').textContent = `Tk${total.toFixed(2)}`;
+        }
+
+        document.querySelectorAll('.product-item').forEach(item => {
+            const decreaseBtn = item.querySelector('.decrease');
+            const increaseBtn = item.querySelector('.increase');
+            const quantitySpan = item.querySelector('.quantity');
+
+            decreaseBtn.addEventListener('click', () => {
+                let quantity = parseInt(quantitySpan.textContent);
+                if (quantity > 1) {
+                    quantity--;
+                    quantitySpan.textContent = quantity;
+                    updatePricing();
+                }
+            });
+
+            increaseBtn.addEventListener('click', () => {
+                let quantity = parseInt(quantitySpan.textContent);
+                quantity++;
+                quantitySpan.textContent = quantity;
+                updatePricing();
+            });
+
+            deleteBtn.addEventListener('click', () => {
+                item.remove();
+                updatePricing();
+            });
+        });
+
+        updatePricing();
+
+        // document.querySelector('.checkout-btn').addEventListener('click', function() {
+        //     alert('Your purchase supports local farmers and rural communities!');
+        // });
+
+        // Add this to your existing script section in mycart.html
+function getCartItems() {
+    const items = [];
+    document.querySelectorAll('.product-item').forEach(item => {
+        items.push({
+            name: item.querySelector('h3').textContent,
+            quantity: parseInt(item.querySelector('.quantity').textContent),
+            price: parseFloat(item.querySelector('.product-price').textContent.replace('Taka', '')),
+            image: item.querySelector('.product-image').src
+        });
+    });
+    return items;
+}
+
+// Store cart items before redirecting to order place
+document.querySelector('.checkout-btn').addEventListener('click', function(e) {
+    const cartItems = getCartItems();
+    const subtotal = parseFloat(document.getElementById('subtotal').textContent.replace('Tk', ''));
+    localStorage.setItem('currentCart', JSON.stringify({
+        items: cartItems,
+        subtotal: subtotal
+    }));
+});
+    </script>
+    
+    <script src="orderTracking.js"></script>
+</body>
+</html>

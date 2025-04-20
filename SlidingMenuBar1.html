@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Sidebar Menu</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #f0f2f5;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 300px;
+            height: 100vh;
+            background: linear-gradient(145deg, #1a1c20 0%, #2d3436 100%);
+            overflow: hidden;
+            box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .menu {
+            position: absolute;
+            top: 0;
+            left: -300px;
+            width: 300px;
+            height: 100%;
+            padding: 20px;
+            background: inherit;
+            transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .menu.active {
+            left: 0;
+        }
+
+        .menu-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .menu-title {
+            color: #fff;
+            font-size: 22px;
+            font-weight: 600;
+            margin: 0;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .menu-icon {
+            margin-right: 12px;
+            color: #3498db;
+            font-size: 24px;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            cursor: pointer;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.05);
+            margin-bottom: 10px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-item:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .menu-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        .menu-item:hover:before {
+            background: #3498db;
+        }
+
+        /* Different colors for different sections */
+        .agricultural .menu-item:hover:before { background: #27ae60; }
+        .meat .menu-item:hover:before { background: #e74c3c; }
+        .dairy .menu-item:hover:before { background: #f1c40f; }
+        .handicraft .menu-item:hover:before { background: #9b59b6; }
+
+        .menu-item i {
+            margin-right: 12px;
+            font-size: 18px;
+            width: 24px;
+            text-align: center;
+        }
+
+        .menu-item .label {
+            flex-grow: 1;
+        }
+
+        .menu-item .arrow {
+            margin-left: 10px;
+            font-size: 14px;
+            opacity: 0.7;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            color: #3498db;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(52, 152, 219, 0.1);
+        }
+
+        .back-btn i {
+            margin-right: 10px;
+        }
+
+        /* Link styles */
+        .menu-item.link {
+            text-decoration: none;
+            position: relative;
+            padding-right: 40px;
+        }
+
+        .menu-item.link:after {
+            content: '\f0c1';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            right: 15px;
+            font-size: 14px;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .menu-item.link:hover:after {
+            opacity: 0.7;
+        }
+
+        /* Badge for new items */
+        .badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #e74c3c;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        /* Count badge */
+        .count {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-left: 8px;
+        }
+
+        /* Tooltip */
+        .tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        .menu-item:hover .tooltip {
+            opacity: 1;
+            bottom: -25px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <!-- Main Menu -->
+        <div class="menu active" id="main-menu">
+            <div class="menu-header">
+                <i class="fas fa-th-large menu-icon"></i>
+                <h2 class="menu-title">Main Menu</h2>
+            </div>
+            <div class="menu-item" onclick="showMenu('agricultural-menu')">
+                <i class="fas fa-seedling"></i>
+                <span class="label">Agricultural Products</span>
+                <span class="count">12</span>
+                <i class="fas fa-chevron-right arrow"></i>
+            </div>
+            <div class="menu-item" onclick="showMenu('handicraft-menu')">
+                <i class="fas fa-paint-brush"></i>
+                <span class="label">Handicraft Products</span>
+                <span class="badge">New</span>
+                <i class="fas fa-chevron-right arrow"></i>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-cog"></i>
+                <span class="label">Settings</span>
+                <i class="fas fa-chevron-right arrow"></i>
+            </div>
+        </div>
+
+        <!-- Agricultural Products Menu -->
+        <div class="menu agricultural" id="agricultural-menu">
+            <div class="back-btn" onclick="goBack('agricultural-menu')">
+                <i class="fas fa-arrow-left"></i>
+                Back to Main Menu
+            </div>
+            <div class="menu-header">
+                <i class="fas fa-seedling menu-icon"></i>
+                <h2 class="menu-title">Agricultural Products</h2>
+            </div>
+            <div class="menu-item" onclick="showMenu('seasonal-menu')">
+                <i class="fas fa-calendar-alt"></i>
+                <span class="label">Seasonal Crops and Fruit</span>
+                <span class="count">8</span>
+                <i class="fas fa-chevron-right arrow"></i>
+            </div>
+            <div class="menu-item" onclick="showMenu('meat-menu')">
+                <i class="fas fa-drumstick-bite"></i>
+                <span class="label">Fresh Meat and Fisheries</span>
+                <span class="badge">Sale</span>
+                <i class="fas fa-chevron-right arrow"></i>
+            </div>
+            <div class="menu-item" onclick="showMenu('dairy-menu')">
+                <i class="fas fa-egg"></i>
+                <span class="label">Dairy & Eggs</span>
+                <i class="fas fa-chevron-right arrow"></i>
+            </div>
+        </div>
+
+        <!-- Seasonal Crops Menu -->
+        <div class="menu" id="seasonal-menu">
+            <div class="back-btn" onclick="goBack('seasonal-menu')">
+                <i class="fas fa-arrow-left"></i>
+                Back to Agricultural
+            </div>
+            <div class="menu-header">
+                <i class="fas fa-calendar-alt menu-icon"></i>
+                <h2 class="menu-title">Seasonal Crops</h2>
+            </div>
+            <a href="#" class="menu-item link">
+                <i class="fas fa-cloud-rain"></i>
+                <span class="label">Rainy Crops</span>
+                <span class="tooltip">View rainy season crops</span>
+            </a>
+            <a href="#" class="menu-item link">
+                <i class="fas fa-sun"></i>
+                <span class="label">Summer Crops</span>
+                <span class="badge">Hot</span>
+            </a>
+            <a href="#" class="menu-item link">
+                <i class="fas fa-snowflake"></i>
+                <span class="label">Winter Crops</span>
+            </a>
+            <a href="#" class="menu-item link">
+                <i class="fas fa-apple-alt"></i>
+                <span class="label">Fresh Fruits</span>
+                <span class="count">15</span>
+            </a>
+        </div>
+
+        <!-- Meat Menu -->
+        <div class="menu meat" id="meat-menu">
+            <div class="back-btn" onclick="goBack('meat-menu')">
+                <i class="fas fa-arrow-left"></i>
+                Back to Agricultural
+            </div>
+            <div class="menu-header">
+                <i class="fas fa-drumstick-bite menu-icon"></i>
+                <h2 class="menu-title">Meat & Fisheries</h2>
+            </div>
+            <a href="#" class="menu-item link">
+                <i class="fas fa-kiwi-bird"></i>
+                <span class="label">Chicken & Poultry</span>
+            </a>
+            <a href="#" class="menu-item link">
+                <i class="fas fa-bacon"></i>
+                <span class="label">Fresh Meat</span>
+                <span class="badge">Fresh</span>
+            </a>
+            <a href="#" class="menu-item link">
+                <i class="fas fa-fish"></i>
+                <span class="label">Fresh Fish</span>
+            </a>
+        </div>
+
+        <!-- Dairy Menu -->
+        <div class="menu dairy" id="dairy-menu">
+            <div class="back-btn" onclick="goBack('dairy-menu')">
+                <i class="fas fa-arrow-left"></i>
+                Back to Agricultural
+            </div>
+            <div class="menu-header">
+                <i class="fas fa-egg menu-icon"></i>
+                <h2 class="menu-title">Dairy & Eggs</h2>
+            </div>
+            <a href="#" class="menu-item link">
+                <i class="fas fa-egg"></i>
+                <span class="label">Eggs</span>
+                <span class="badge">Organic</span>
+            </a>
+            <a href="#" class="menu-item link">
+                <i class="fas fa-glass-milk"></i>
+                <span class="label">Condensed Milk</span>
+            </a>
+        </div>
+
+        <!-- Handicraft Menu -->
+        <div class="menu handicraft" id="handicraft-menu">
+            <div class="back-btn" onclick="goBack('handicraft-menu')">
+                <i class="fas fa-arrow-left"></i>
+                Back to Main Menu
+            </div>
+            <div class="menu-header">
+                <i class="fas fa-paint-brush menu-icon"></i>
+                <h2 class="menu-title">Handicraft Products</h2>
+            </div>
+            <a href="#" class="menu-item link">
+                <i class="fas fa-tshirt"></i>
+                <span class="label">Textiles</span>
+                <span class="badge">Sale</span>
+            </a>
+            <a href="#" class="menu-item link">
+                <i class="fas fa-shapes"></i>
+                <span class="label">Pottery</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        const menuHistory = ['main-menu'];
+
+        function showMenu(menuId) {
+            // Hide current menu
+            document.querySelector('.menu.active').classList.remove('active');
+            
+            // Show new menu
+            document.getElementById(menuId).classList.add('active');
+            
+            // Add to history
+            menuHistory.push(menuId);
+        }
+
+        function goBack(currentMenuId) {
+            if (menuHistory.length > 1) {
+                // Remove current menu from history
+                menuHistory.pop();
+                
+                // Hide current menu
+                document.getElementById(currentMenuId).classList.remove('active');
+                
+                // Show previous menu
+                const previousMenuId = menuHistory[menuHistory.length - 1];
+                document.getElementById(previousMenuId).classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>

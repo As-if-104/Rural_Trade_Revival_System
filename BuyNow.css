@@ -1,0 +1,72 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.payment{
+    width: 500px;
+    height: 500px;
+    background-color: white;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    padding: 10px 50px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: -2px 4px 15px -3px rgba(0,0,0,0.75);
+                -webkit-box-shadow: -2px 4px 15px -3px rgba(0,0,0,0.75);
+                -moz-box-shadow: -2px 4px 15px -3px rgba(0,0,0,0.75);
+}
+
+.payment label{
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.payment .PayInput{
+    padding: 10px;
+    margin: 10px 0px;
+    border: none;
+    border-bottom: 1px solid rgb(97, 96, 96);
+}
+
+.payment .close{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 10px;
+    cursor: pointer;
+    color: black;
+    background-color: lightgray;
+    font-size: larger;
+    width: 25px;
+    height: 25px;
+    padding: 2.5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.payment .PayButton{
+    height: 40px;
+    bottom: 0px;
+    width: 100%;
+    left: 0;
+    color: white;
+    position: absolute;
+    background-color: #369e63;
+    border: none;
+    cursor: pointer;
+}
+
+.payment .PayButton:hover{
+    background-color: #288c55;
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Now</title>
+    <link rel="stylesheet" href="BuyNow.css">
+</head>
+<body>
+    <div id="cartModal" class="payment">
+        <h2 style="font-size: 20px; color: rgb(162, 159, 159);">Order Details</h2>
+        <label> Name </label>
+        <input type="text" name="name" class="PayInput" required>
+
+        <label>Order From:</label>
+        <input type="text" name="orderFrom" class="PayInput" required>
+
+        <label>Order To:</label>
+        <input type="text" name="orderTo" class="PayInput" required>
+
+        <label>Product Weight</label>
+        <input type="text" name="productWeight" class="PayInput" required>
+
+        <label>Payment Method:</label>
+        <input type="text" name="paymentMethod" class="PayInput" required>
+
+        <label>Send to:</label>
+        <input type="text" name="recipient" class="PayInput" required>
+
+        <button type="submit" class="PayButton" onclick="placeOrder()">Checkout!</button>
+
+        <span class="close">X</span>
+    </div>
+
+    <script>
+        const payment = document.querySelector(".payment");
+        const close = document.querySelector(".close");
+
+        // BuyButton.addEventListenrer("click", ()=>{
+        //     payment.style.display = "block";
+        // })
+
+        close.addEventListener("click", ()=>{
+            payment.style.display = "none";
+        });
+
+        function placeOrder() {
+            alert("Order placed successfully!");
+            closeModal();
+        }
+    </script>
+</body>
+</html>

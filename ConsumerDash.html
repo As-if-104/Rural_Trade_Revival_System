@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trade Revival Consumer Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        :root {
+            /* Light Theme Variables */
+            --bg-primary: #f4f6f9;
+            --bg-secondary: #ffffff;
+            --text-primary: #1a2b3c;
+            --text-secondary: #4a5568;
+            --accent-color: #2c7be5;
+            --hover-color: #1a5fc4;
+            --border-color: #e2e8f0;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+
+            /* Dark Theme Variables */
+            --dark-bg-primary: #121212;
+            --dark-bg-secondary: #1e1e1e;
+            --dark-text-primary: #e0e0e0;
+            --dark-text-secondary: #a0a0a0;
+            --dark-accent-color: #4caaf4;
+            --dark-hover-color: #3b90e0;
+            --dark-border-color: #2d2d2d;
+            --dark-shadow-color: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        body.dark-mode {
+            background-color: var(--dark-bg-primary);
+            color: var(--dark-text-primary);
+        }
+
+        .sidebar {
+            width: 280px;
+            background-color: var(--bg-secondary);
+            border-right: 1px solid var(--border-color);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .dark-mode .sidebar {
+            background-color: var(--dark-bg-secondary);
+            border-color: var(--dark-border-color);
+        }
+
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        .dark-mode .logo {
+            color: var(--dark-accent-color);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+        }
+
+        .nav-menu {
+            list-style: none;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item i {
+            margin-right: 12px;
+            font-size: 1.2rem;
+        }
+
+        .nav-item:hover {
+            background-color: var(--hover-color);
+            color: white;
+        }
+
+        .nav-item.active {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .dark-mode .header {
+            background-color: var(--dark-bg-secondary);
+            border-color: var(--dark-border-color);
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .stat-card {
+            background-color: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 6px var(--shadow-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .dark-mode .stat-card {
+            background-color: var(--dark-bg-secondary);
+            box-shadow: 0 4px 6px var(--dark-shadow-color);
+        }
+
+        .chart-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .chart-card {
+            background-color: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 6px var(--shadow-color);
+        }
+
+        .dark-mode .chart-card {
+            background-color: var(--dark-bg-secondary);
+            box-shadow: 0 4px 6px var(--dark-shadow-color);
+        }
+
+        .progress-bar {
+            background-color: var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            height: 12px;
+            margin-top: 10px;
+        }
+
+        .progress-bar-fill {
+            background-color: var(--accent-color);
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+
+        .content-section {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-primary);
+            display: none;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .dark-mode .content-section {
+            background-color: var(--dark-bg-primary);
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @media (max-width: 1200px) {
+            .dashboard-grid, .chart-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .nav-menu a{
+            color: black;
+            font-size: 18px;
+            border-radius: 8px;
+            /* display: block; */
+            transition: background 0.3s;
+            text-decoration: none;
+            margin-left: -10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">Trade Revival</div>
+            <button class="theme-toggle" id="themeToggle">
+                <i class="ri-moon-line"></i>
+            </button>
+        </div>
+        <ul class="nav-menu">
+            <a class="nav-item" href="DirectMart.html"><i class="fas fa-home nav-item" style="margin-left: -5px;"></i>Home</a>
+            <li class="nav-item active" data-section="dashboard">
+                <i class="ri-dashboard-line"></i> Dashboard
+            </li>
+            <li class="nav-item" data-section="trade-opportunities">
+                <i class="ri-exchange-line"></i> Trade Opportunities
+            </li>
+            <li class="nav-item" data-section="community-impact">
+                <i class="ri-team-line"></i> Community Impact
+            </li>
+            <li class="nav-item" data-section="economic-insights">
+                <i class="ri-line-chart-line"></i> Local Economic Insights
+            </li>
+            <li class="nav-item" data-section="profile-settings">
+                <i class="ri-user-settings-line"></i> Profile Settings
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content Sections -->
+    <div class="main-content">
+        <!-- Dashboard Section -->
+        <div id="dashboard" class="content-section active">
+            <!-- Header -->
+            <div class="header">
+                <h1>Trade Revival Consumer Dashboard</h1>
+            </div>
+
+            <!-- Dashboard Grid -->
+            <div class="dashboard-grid">
+                <div class="stat-card">
+                    <div>
+                        <h3>Local Trade Value</h3>
+                        <p>Tk78,456</p>
+                    </div>
+                    <i class="ri-exchange-dollar-line" style="font-size: 2rem;"></i>
+                </div>
+                <div class="stat-card">
+                    <div>
+                        <h3>Community Trades</h3>
+                        <p>328</p>
+                        <div class="progress-bar">
+                            <div class="progress-bar-fill" style="width: 65%;"></div>
+                        </div>
+                    </div>
+                    <i class="ri-handshake-line" style="font-size: 2rem;"></i>
+                </div>
+                <div class="stat-card">
+                    <div>
+                        <h3>Local Businesses</h3>
+                        <p>42</p>
+                    </div>
+                    <i class="ri-store-2-line" style="font-size: 2rem;"></i>
+                </div>
+                <div class="stat-card">
+                    <div>
+                        <h3>Economic Impact</h3>
+                        <p>+12.3%</p>
+                    </div>
+                    <i class="ri-growth-line" style="font-size: 2rem;"></i>
+                </div>
+            </div>
+
+            <!-- Charts -->
+            <div class="chart-container">
+                <div class="chart-card">
+                    <h2>Trade Volume Trends</h2>
+                    <canvas id="tradeVolumeChart"></canvas>
+                </div>
+                <div class="chart-card">
+                    <h2>Trade Category Distribution</h2>
+                    <canvas id="tradeCategoryChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Trade Opportunities Section -->
+        <div id="trade-opportunities" class="content-section">
+            <div class="header">
+                <h1>Trade Opportunities</h1>
+            </div>
+            <div style="padding: 20px;">
+                <h2>Upcoming Trade Opportunities</h2>
+                <p>Here you can find local and regional trade opportunities to expand your business network.</p>
+                <div style="margin-top: 20px;">
+                    <div class="stat-card" style="margin-bottom: 15px;">
+                        <div>
+                            <h3>Local Business Expo</h3>
+                            <p>Date: August 15, 2024 | Location: Community Center</p>
+                        </div>
+                    </div>
+                    <div class="stat-card" style="margin-bottom: 15px;">
+                        <div>
+                            <h3>Digital Marketplace Workshop</h3>
+                            <p>Date: September 5, 2024 | Online Event</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Community Impact Section -->
+        <div id="community-impact" class="content-section">
+            <div class="header">
+                <h1>Community Impact</h1>
+            </div>
+            <div style="padding: 20px;">
+                <h2>Community Trade Metrics</h2>
+                <div style="margin-top: 20px;">
+                    <div class="stat-card" style="margin-bottom: 15px;">
+                        <div>
+                            <h3>Total Community Trades</h3>
+                            <p>1,245 trades this quarter</p>
+                        </div>
+                    </div>
+                    <div class="stat-card" style="margin-bottom: 15px;">
+                        <div>
+                            <h3>Local Economic Boost</h3>
+                            <p>$456,789 circulated within community</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div>
+                            <h3>Active Community Traders</h3>
+                            <p>328 local traders</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Local Economic Insights Section -->
+        <div id="economic-insights" class="content-section">
+            <div class="header">
+                <h1>Local Economic Insights</h1>
+            </div>
+            <div style="padding: 20px;">
+                <h2>Economic Trends and Analysis</h2>
+                <canvas id="economicTrendsChart" style="margin-top: 20px;"></canvas>
+                <div style="margin-top: 20px;">
+                    <div class="stat-card" style="margin-bottom: 15px;">
+                        <div>
+                            <h3>Quarterly Growth</h3>
+                            <p>+12.3% local economic growth</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div>
+                            <h3>Sector Performance</h3>
+                            <p>Services: +15%, Goods: +10%, Digital: +18%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Settings Section -->
+        <div id="profile-settings" class="content-section">
+            <div class="header">
+                <h1>Profile Settings</h1>
+            </div>
+            <div style="padding: 20px;">
+                <h2>User Profile</h2>
+                <form style="max-width: 500px;">
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; margin-bottom: 5px;">Name</label>
+                        <input type="text" style="width: 100%; padding: 10px; border: 1px solid var(--border-color); border-radius: 8px;">
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; margin-bottom: 5px;">Email</label>
+                        <input type="email" style="width: 100%; padding: 10px; border: 1px solid var(--border-color); border-radius: 8px;">
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; margin-bottom: 5px;">Trade Interests</label>
+                        <select multiple style="width: 100%; padding: 10px; border: 1px solid var(--border-color); border-radius: 8px;">
+                            <option>Goods</option>
+                            <option>Services</option>
+                            <option>Local Crafts</option>
+                            <option>Digital Trade</option>
+                        </select>
+                    </div>
+                    <button style="padding: 10px 20px; background-color: var(--accent-color); color: white; border: none; border-radius: 8px;">Save Profile</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            const icon = themeToggle.querySelector('i');
+            icon.classList.toggle('ri-moon-line');
+            icon.classList.toggle('ri-sun-line');
+        });
+
+        // Navigation
+        const navItems = document.querySelectorAll('.nav-item');
+        const contentSections = document.querySelectorAll('.content-section');
+
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                // Remove active class from all nav items and content sections
+                navItems.forEach(nav => nav.classList.remove('active'));
+                contentSections.forEach(section => section.classList.remove('active'));
+
+                // Add active class to clicked nav item and corresponding section
+                item.classList.add('active');
+                const sectionId = item.getAttribute('data-section');
+                document.getElementById(sectionId).classList.add('active');
+            });
+        });
+
+        // Trade Volume Chart
+        const tradeVolumeCtx = document.getElementById('tradeVolumeChart').getContext('2d');
+        new Chart(tradeVolumeCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Trade Volume',
+                    data: [15000, 22000, 18500, 30000, 25000, 35000],
+                    borderColor: 'rgb(44, 123, 229)',
+                    backgroundColor: 'rgba(44, 123, 229, 0.1)',
+                    fill: true,
+                }],
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false },
+                },
+            },
+        });
+
+        // Trade Category Pie Chart
+        const tradeCategoryCtx = document.getElementById('tradeCategoryChart').getContext('2d');
+        new Chart(tradeCategoryCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Goods', 'Services', 'Local Crafts', 'Digital Trade'],
+                datasets: [{
+                    data: [35, 25, 20, 20],
+                    backgroundColor: ['#2c7be5', '#3b82f6', '#4caaf4', '#76b5f3'],
+                }],
+            },
+            options: {
+                responsive: true,
+            },
+        });
+
+        // Economic Trends Chart
+        const economicTrendsCtx = document.getElementById('economicTrendsChart').getContext('2d');
+        new Chart(economicTrendsCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+                datasets: [{
+                    label: 'Economic Growth',
+                    data: [8.5, 12.3, 10.7, 11.2],
+                    backgroundColor: '#2c7be5',
+                }],
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Growth Percentage'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                },
+            },
+        });
+    </script>
+</body>
+</html>

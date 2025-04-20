@@ -1,0 +1,358 @@
+body{
+    margin: 0;
+    border: border-box;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.navbar{
+    background-color: #0F1111;
+    height: 60px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.nav-logo{
+    width: 100px;
+    height: 50px;
+    text-align: center;
+    align-items: center;
+    margin-top: 10px;
+    cursor: pointer;
+    margin: 10px;
+    padding: 5px 28px 0px 6px;
+    font-size: 20px;
+    font-weight: bold;
+    font-style: italic;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.nav-logo i{
+    color: pink;
+}
+.border{
+    border: 2px solid transparent;
+    border-radius: 10px;
+    transition: 0.5s ease-in-out;
+}
+.border:hover{
+    border: 2px solid hsl(164, 94%, 45%);
+    transition: 0.5s ease-in-out;
+}
+
+.nav-add{
+    margin: 0px 11px 0px 2px;
+    padding: 10px 9px 9px;
+}
+
+.add-first{
+    color: #CCCCCC;
+    font-size: 1rem;
+    margin-left: 20px;
+    font-family: 'Times New Roman', Times, serif;
+    cursor: pointer;
+
+}
+
+.add-second{
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.nav-search{
+    display: flex;
+    justify-content: space-evenly;
+    width: 750px;
+    height: 40px;
+    background-color: pink;
+    border-radius: 4px;
+}
+
+.nav-search:hover{
+    border: 3px solid orange;
+}
+.select-all{
+    font-size: 12px;
+    border: none;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    width: 50px;
+    text-align: center;
+    background-color: #E6E6E6;
+    cursor: pointer;
+}
+
+.searching{
+    background-color: #FFFFFF;
+    border: none;
+    width: 100%;
+    font-size: 1rem;
+    padding-left: 7px;
+}
+
+.searching:focus{
+    outline: none;
+}
+
+.search-icon{
+    width: 45px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    color: black;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.language{
+    display: flex;
+    border: none;
+    margin: 0px 11px 0px 2px;
+    padding: 10px 9px 9px;
+    transition: 0.5s ease-in-out;
+}
+
+.choose_lang{
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: black;
+    border-radius: 4px;
+    color: #FFFFFF;
+    text-align: center;
+    border: none;
+    transition: 0.5s ease-in-out;
+}
+
+.nav-signIn{
+    margin: 0px 11px 0px 2px;
+    padding: 10px 9px 11px;
+    cursor: pointer;
+} 
+
+.nav-signIn a{
+    color: white;
+    text-decoration: none;
+}
+
+.hello-signIn{
+    font-size: 0.8rem;
+    font-weight: lighter;
+}
+
+.account-signIn{
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+
+.nav-cart{
+    padding: 10px 9px 11px;
+    cursor: pointer;
+}
+.nav-cart i{
+    font-size: 30px;
+}
+
+.nav-cart{
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.Profile_pic img{
+    border-radius: 50%;
+    width: 45px;
+    cursor: pointer;
+}
+
+.Profile_pic img:hover{
+    border: 5px solid hsl(164, 94%, 45%);
+    transition: 0.3s ease;
+}
+
+.panel{
+    background-color: #222f3d;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    color: white;
+    cursor: pointer;
+}
+
+.panel .all{
+    padding: 0px 0px 0px 5px;
+    font-size: 1.1rem;
+    width: 5%;
+}
+.all i{
+    color: hsl(33, 86%, 73%);
+}
+
+.all a{
+    color: hsl(33, 86%, 73%);
+    text-decoration: none;
+} 
+
+.all a:hover{
+    color: hsl(33, 86%, 86%);
+    transition: color 0.5s ease;
+}
+
+.panel-ops a{
+    position: relative;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    color: #E6E6E6;
+    margin-right: 30px;
+}
+
+.panel-ops a::after{
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background:hsl(164, 94%, 45%);
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    color: #0056b3;
+
+}
+.panel-ops a:hover::after{
+    opacity: 1;
+    transition: opacity 0.5s ease;
+    color: #0056b3;
+}
+
+.panel-ops a:hover{
+    color: hsl(223, 96%, 45%);
+}
+
+.panel-ops{
+    width: 70%;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.plus{
+    font-size: 1.3rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.plus a{
+    color: hsla(335, 96%, 50%, 10);
+    text-decoration: none;
+}
+
+.plus a:hover{
+    color: #0056b3;
+    font-size: 1.2rem;
+    transition: 0.3s ease;
+} 
+
+h1{
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    color: white;
+    justify-content: center;
+    margin-top: 10px;
+    background-color: hsl(210, 46%, 19%);
+    border-radius: 20px;
+    border: 2px solid;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+h1:hover {
+  box-shadow: 0 0 10px #3498db, 0 0 20px #3498db, 0 0 30px #3498db;
+  animation: glow 1.5s ease-in-out infinite alternate;
+  color: aqua;
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 5px #3498db, 0 0 10px #3498db, 0 0 15px #3498db;
+  }
+  to {
+    box-shadow: 0 0 10px #3498db, 0 0 20px #3498db, 0 0 30px #3498db;
+  }
+}
+
+.shoping{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    background-color: #e2e7e6;
+}
+
+.shoping .box:hover {
+  box-shadow: 0 0 10px #3498db, 0 0 20px #3498db, 0 0 30px #3498db;
+  animation: glow 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 5px #3498db, 0 0 10px #3498db, 0 0 15px #3498db;
+  }
+  to {
+    box-shadow: 0 0 10px #3498db, 0 0 20px #3498db, 0 0 30px #3498db;
+  }
+}
+
+.box{
+    display: flex;
+    flex-direction: column;
+    margin: 15px;
+    padding: 20px 0px 15px;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 0px 10px rgba(8, 219, 235, 0.995);
+    height: 400px;
+    width: 23%;
+}
+
+.box-content{
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+h3{
+    font-size: 26px;
+    font-weight: bold;
+    text-align: center;
+    padding: 0px;
+    margin: 0px;
+    color: hsla(33, 26%, 54%, 0.662);
+}
+
+.box-img{
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.box-content p{
+    font-size: 1.3rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    color: hsla(0, 0%, 48%, 0.8);
+}
+
+.box-content a{
+    text-decoration: none;
+    color: hsl(343, 91%, 35%);
+}
+
+.box-content a:hover{
+    color: hsl(343, 95%, 48%);
+}

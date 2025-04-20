@@ -1,0 +1,120 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.review-section {
+    width: 100%;
+    max-width: 600px;
+    background-color: #fff;
+    padding-left: 20px;
+    padding-right: 44px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 7px rgb(9, 249, 209);
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.review-section h2, .review-section h3 {
+    color: #333;
+    text-align: center;
+}
+
+.review-form {
+    margin-bottom: 20px;
+}
+
+.review-form input, 
+.review-form textarea {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    box-shadow: 0px 0px 7px rgb(9, 249, 209);
+}
+
+.review-form textarea,
+.review-form input:focus{
+    outline: none;
+}
+
+.review-form button {
+    width: 24%;
+    padding: 0.6em 1em;
+    margin-left: 37%;
+    margin-right: 45%;
+    border: none;
+    border-radius: 1000px;
+    background-color: #161a20;
+    color: #f0f0f0;
+    font-size: 18px;
+    cursor: pointer;
+    /* transition: background-color 0.3s; */
+    font-family: 'Courier New', Courier, monospace;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button::after{
+    content: " ";
+    position: absolute;
+    border-radius: 1000px;
+    width: 102%;
+    height: 107%;
+    background-image: linear-gradient(to bottom right, #008cff, #e100ff);
+    z-index: -1;
+}
+
+button:hover{
+    z-index: 0;
+    box-shadow: 40px 0 100px #008cff,
+                -40 0 100px #e100ff;
+}
+
+/* .review-form button:hover {
+    background-color: #45a049;
+} */
+
+.reviews-list {
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+}
+
+.review {
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+
+.review .name {
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+.review .comment {
+    margin: 5px 0 0 0;
+}
+
+.rating{
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    color: #4CAF50;
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 5px;
+    border: 3px dotted #4CAF50;
+}
+
+.rating:focus{
+    outline: none;
+}

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Cart System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .breadcrumb {
+            font-size: 14px;
+            color: #888;
+            margin: 20px 30px;
+        }
+        .breadcrumb a {
+            text-decoration: none;
+            color: #888;
+        }
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        .breadcrumb strong {
+            color: #000;
+        }
+
+        .categories {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 20px auto;
+            flex-wrap: wrap;
+        }
+
+        .category-item {
+            text-align: center;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .category-item img {
+            width: 160px;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .category-item p {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .category-item:hover {
+            transform: scale(1.05);
+        }
+
+        .cart-summary {
+            position: fixed;
+            right: 30px;
+            top: 50px;
+            background-color: #f4f4f4;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .cart-summary span {
+            font-size: 14px;
+            color: #333;
+        }
+
+        .cart-summary p {
+            margin: 5px 0 0;
+            font-weight: bold;
+            font-size: 18px;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="#">Food</a> &nbsp;>&nbsp; <strong>Meat & Fish</strong>
+    </div>
+
+    <!-- Category Section -->
+    <div class="categories">
+        <!-- Each product has a data-price attribute -->
+        <div class="category-item" data-price="250">
+            <img src="https://via.placeholder.com/160x120.png?text=Chicken+%26+Poultry" alt="Chicken & Poultry">
+            <p>Chicken & Poultry - ৳250</p>
+        </div>
+        <div class="category-item" data-price="300">
+            <img src="https://via.placeholder.com/160x120.png?text=Premium+Perishables" alt="Premium Perishables">
+            <p>Premium Perishables - ৳300</p>
+        </div>
+        <div class="category-item" data-price="200">
+            <img src="https://via.placeholder.com/160x120.png?text=Frozen+Fish" alt="Frozen Fish">
+            <p>Frozen Fish - ৳200</p>
+        </div>
+        <div class="category-item" data-price="400">
+            <img src="https://via.placeholder.com/160x120.png?text=Meat" alt="Meat">
+            <p>Meat - ৳400</p>
+        </div>
+        <div class="category-item" data-price="150">
+            <img src="https://via.placeholder.com/160x120.png?text=Tofu+%26+Meat+Alternatives" alt="Tofu & Meat Alternatives">
+            <p>Tofu & Meat Alternatives - ৳150</p>
+        </div>
+        <div class="category-item" data-price="180">
+            <img src="https://via.placeholder.com/160x120.png?text=Dried+Fish" alt="Dried Fish">
+            <p>Dried Fish - ৳180</p>
+        </div>
+    </div>
+
+    <!-- Cart Summary -->
+    <div class="cart-summary">
+        <span>🛒 <strong id="item-count">0</strong> ITEMS</span>
+        <p>Total: ৳ <span id="total-price">0</span></p>
+    </div>
+
+    <script>
+        // Select cart elements
+        const itemCount = document.getElementById('item-count');
+        const totalPrice = document.getElementById('total-price');
+
+        // Variables to track cart details
+        let cartItemCount = 0;
+        let cartTotalPrice = 0;
+
+        // Select all products
+        const products = document.querySelectorAll('.category-item');
+
+        // Add event listener to each product
+        products.forEach(product => {
+            product.addEventListener('click', () => {
+                // Get the price of the selected product
+                const price = parseInt(product.getAttribute('data-price'), 10);
+
+                // Update cart count and total price
+                cartItemCount++;
+                cartTotalPrice += price;
+
+                // Reflect updated values in the UI
+                itemCount.textContent = cartItemCount;
+                totalPrice.textContent = cartTotalPrice;
+            });
+        });
+    </script>
+</body>
+</html>

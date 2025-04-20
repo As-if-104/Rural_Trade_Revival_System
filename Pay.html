@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <link rel="stylesheet" href="Pay.css">
+</head>
+<body>
+    <!-- payment.html -->
+    <div class="payment-section">
+        <h3>পেমেন্ট সম্পন্ন করুন</h3>
+        <form id="paymentForm">
+            <label for="paymentMethod">পেমেন্ট পদ্ধতি:</label>
+            <select id="paymentMethod" required>
+                <option value="">--পদ্ধতি নির্বাচন করুন--</option>
+                <option value="bkash">বিকাশ</option>
+                <option value="nagad">নগদ</option>
+                <option value="rocket">রকেট</option>
+                <option value="cash">ক্যাশ অন ডেলিভারি</option>
+            </select>
+
+            <label for="accountNumber">অ্যাকাউন্ট নম্বর:</label>
+            <input type="text" id="accountNumber" placeholder="অ্যাকাউন্ট নম্বর দিন" required>
+
+            <label for="amount">পরিমাণ (৳):</label>
+            <input type="number" id="amount" min="1" placeholder="পরিমাণ দিন" required>
+
+            <button type="submit">পেমেন্ট নিশ্চিত করুন</button>
+        </form>
+        <div id="paymentStatus"></div>
+    </div>
+
+    <script src="Pay.js"> </script>
+
+</body>
+</html>

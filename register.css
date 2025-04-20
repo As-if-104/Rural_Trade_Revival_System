@@ -1,0 +1,230 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    background-image: url("Images/RuralArea.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.logreg-box .form-box{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+}
+
+.register{
+    background-image: url("Images/RuralArea.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    backdrop-filter: blur(50px);
+
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    /* box-shadow: 0px 0px 10px rgba(31, 226, 203, 0.5); */
+    text-align: center;
+    padding-left: 200px;
+    padding-right: 200px;
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin-left: 400px;
+    background: rgba(255, 255, 255, .1);
+    /* background-color: rgb(10, 209, 172); */
+    color: white;
+    font-size: larger;
+}
+
+.register:hover{
+    box-shadow: 12px 12px 12px rgba(255, 255, 255, 0.2), -10px -10px 10px rgba(31, 226, 203, 0.2);
+}
+
+.form-box h2{
+    font-size: 2rem;
+    color: hsl(32, 91%, 58%);
+    margin-bottom: 5px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.form-box h4{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.2rem;
+    color: hsl(33, 70%, 54%);
+    margin-top: 15px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.form-box .input-box{
+    width: 340px;
+    height: 50px;
+    border-bottom: 2px solid hsl(33, 50%, 54%);
+    position: relative;
+    margin: 30px 0;
+    font-family: 'Times New Roman', Times, serif;
+    text-align: left;
+}
+
+.input-box input{
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 22px;
+    outline: none;
+}
+
+.input-box label{
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    font-size: 18px;
+    font-weight: 500;
+    pointer-events: none;
+    transition: .5s ease;
+}
+
+.input-box input:focus~label,
+.input-box input:valid~label{
+    top: -2px;
+    color: hsl(41, 100%, 51%);
+    font-size: 15px;
+}
+
+.input-box .icon{
+    position: absolute;
+    top: 13px;
+    right: 0;
+    font-size: 19px;
+    color: black;
+}
+
+.btn{
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    /* background-color: hsl(55, 100%, 50%);
+    color: hsl(0, 9%, 2%); */
+    background-color: hsl(0, 0%, 0%);
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 18px;
+    margin: 10px 0px;
+    cursor: pointer;
+    border-radius: 25px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 45px;
+}
+
+.btn:hover{
+    /* background-color: hsl(0, 0%, 25%); */
+    box-shadow: 12px 12px 12px rgba(0, 0, 0, 0.1), -5px -5px 10px lightgrey inset;
+    color: antiquewhite;
+}
+
+.form-box .account{
+    font-size: 17px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 18px;
+}
+
+.form-group select{
+    cursor: pointer;
+}
+
+label {
+  margin-right: 10px;
+}
+
+.form-group select, input[type="date"] {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.form-group i{
+    margin-right: 10px;
+    font-size: 16px;
+    color: black;
+}
+
+/*/ i{
+    color: white;
+} */
+
+.gender input{
+    cursor: pointer;
+}
+.gender i{
+    color: black;
+}
+
+.dateOfBirth{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 18px;
+    margin-bottom: 5px;
+    margin-left: 0px;
+}
+
+.birth i{
+    margin-right: 10px;
+    font-size: 16px;
+    color: black;
+}
+
+.check-NID{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 18px;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.agreed{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 18px;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.agreed input{
+    cursor: pointer;
+}
+
+.account{
+    margin: 0px;
+}
+
+.account p a{
+    color: hsl(343, 93%, 48%);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.account p a:hover{
+    color: hsl(343, 91%, 68%);
+    text-decoration: underline;
+}
+

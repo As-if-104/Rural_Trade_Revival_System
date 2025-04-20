@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/jpg" href="Images/Diamond.jpg">
+    <title>Selling Product</title>
+    <link rel="stylesheet" href="Filtering.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="product-container">
+        <div class="filters">
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="প্রোডাক্ট খুঁজুন...">
+                <i class="fas fa-search"></i>
+            </div>
+            
+            <div class="filter-options">
+                <select id="sortBy">
+                    <option value="">সর্টিং অপশন</option>
+                    <option value="price-low">কম দাম থেকে বেশি</option>
+                    <option value="price-high">বেশি দাম থেকে কম</option>
+                    <option value="rating">রেটিং অনুযায়ী</option>
+                </select>
+
+                <select id="priceRange">
+                    <option value="all">সব দাম</option>
+                    <option value="under100">৳১০০ এর নিচে</option>
+                    <option value="100-500">৳১০০-৫০০</option>
+                    <option value="above500">৳৫০০+</option>
+                </select>
+
+                <select id="ratingFilter">
+                    <option value="all">সব রেটিং</option>
+                    <option value="4">৪+ স্টার</option>
+                    <option value="3">৩+ স্টার</option>
+                    <option value="2">২+ স্টার</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="product-listings" id="productList">
+            <!-- Products will be dynamically inserted here -->
+        </div>
+    </div>
+
+    <script src="Filtering.js"></script>
+</body>
+</html>

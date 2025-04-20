@@ -1,0 +1,29 @@
+.payment-section {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.payment-section form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#paymentStatus {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    display: none;
+}
+
+.payment-success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.payment-failed {
+    background-color: #f8d7da;
+    color: #721c24;
+}

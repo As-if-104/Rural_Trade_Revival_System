@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <title>Payment Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+            color: #333;
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            flex-wrap: wrap;
+        }
+        .payment-section, .summary-section {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .payment-section {
+            width: 65%;
+        }
+        .summary-section {
+            width: 30%;
+            margin-top: -41%;
+            margin-left: 70%;
+        }
+        h3, h4 {
+            margin-top: 0;
+        }
+        .method {
+            margin-bottom: 20px;
+        }
+        .method label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .method label:hover {
+            background-color: #f9f9f9;
+        }
+        .method input {
+            margin-right: 10px;
+        }
+        .method img {
+            height: 30px;
+            margin-right: 10px;
+        }
+        .payment-details {
+            margin-left: 40px;
+            font-size: 14px;
+            color: #666;
+        }
+        .checkout-summary p {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 0;
+        }
+        .checkout-summary .total {
+            font-weight: bold;
+            font-size: 18px;
+            color: #e74c3c;
+        }
+        .voucher {
+            margin-top: 10px;
+            background-color: #e9f7e3;
+            padding: 10px;
+            color: #2d8a4e;
+            text-align: center;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px;
+            color: #777;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            margin-left: 30%;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .inline-input {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .inline-input input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .inline-input button {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Payment Method Section -->
+        <div class="payment-section">
+            <h3>Payment Method</h3>
+
+            <!-- Cash on Delivery -->
+            <div class="method">
+                <label>
+                    <input type="radio" name="payment" value="cod">
+                    <i class="fa-solid fa-wallet" alt="Cash on Delivery" style="margin-right: 10px;"></i>
+                    Cash on Delivery
+                </label>
+                <div class="payment-details">Pay when the item is delivered to your doorstep.</div>
+            </div>
+
+            <!-- Mobile Wallet -->
+            <div class="method">
+                <h4>Mobile Wallet</h4>
+                <label>
+                    <input type="radio" name="payment" value="bkash">
+                    <img src="Images/bkash.png" alt="bKash">
+                    bKash
+                </label>
+                <div class="payment-details">Send money via bKash to our merchant number.</div>
+                <label>
+                    <input type="radio" name="payment" value="nagad">
+                    <img src="Images/nagad.png" alt="Nagad">
+                    Nagad
+                </label>
+                <div class="payment-details">Use Nagad for quick and easy payments.</div>
+                <label>
+                    <input type="radio" name="payment" value="rocket">
+                    <img src="Images/rocket.png" alt="Rocket">
+                    Rocket
+                </label>
+                <div class="payment-details">Pay through Rocket mobile banking service.</div>
+            </div>
+
+            <!-- Debit/Credit Card -->
+            <div class="method">
+                <h4>Debit/Credit Card</h4>
+                <label>
+                    <input type="radio" name="payment" value="card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg" alt="Visa">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Mastercard_2019_logo.svg" alt="MasterCard">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/American_Express_logo.svg" alt="Amex">
+                    Debit/Credit Card
+                </label>
+                <div class="payment-details">Secure card payments supported (Visa, MasterCard, Amex).</div>
+            </div>
+        </div>
+
+        <!-- Checkout Summary -->
+        <div class="summary-section">
+            <h3>Shipping Address</h3>
+            <div class="checkout-summary" style="font-family: 'Times New Roman', Times, serif; font-size: 25px;">
+                <p style="font-size: large;">Name: MD. Naimul Islam Asif</p>
+
+                <p style="margin-bottom: 20px; font-size: large;">Phone: 8801619827526, 01642556795</p>
+
+                <div class="checkout-summary" style="font-family: 'Times New Roman', Times, serif; font-size: 20px; color: #666;">
+                    Road #29; House #34; Fourth floor; West Side; Rupnagar R/A Mirpur, Dhaka-1216
+
+                    রূপনগর , ঢাকা
+                </div>
+                
+            </div>
+            <h3 style="margin-top: 20%;">Checkout Summary</h3>
+            <div class="checkout-summary" style="font-size: 23px;">
+                <p style="font-family: 'Times New Roman', Times, serif;">Subtotal <span>960 TK.</span></p>
+                <p style="font-family: 'Times New Roman', Times, serif;">Delivery Charge <span>10 TK.</span></p>
+                <p style="font-family: 'Times New Roman', Times, serif;">Discount (31%) <span>-40 TK.</span></p>
+                <p class="total" style="font-family: 'Times New Roman', Times, serif;">Total Payable <span>930 TK.</span></p>
+            </div>
+            <div class="voucher">
+                You are saving 31%!
+            </div>
+            <a href="Confirmed.html" style="text-decoration: none;"><button>Proceed to Payment</button></a>
+
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    const proceedButton = document.querySelector("button");
+                    const paymentMethods = document.querySelectorAll('input[name="payment"]');
+
+                    proceedButton.addEventListener("click", function () {
+                        let selectedMethod = null;
+
+                        // Check if any payment method is selected
+                        paymentMethods.forEach(method => {
+                            if (method.checked) {
+                                selectedMethod = method.value;
+                            }
+                        });
+
+                        if (selectedMethod) {
+                            // If a method is selected, display success message
+                            alert(`Proceeding to payment via: ${getPaymentMethodName(selectedMethod)}.`);
+                            // Redirect or perform other actions
+                            console.log("Redirecting to payment gateway...");
+                            // window.location.href = "payment_gateway_url"; // Uncomment to add a redirect
+                        } else {
+                            // If no method is selected, display an error
+                            alert("Please select a payment method before proceeding.");
+                        }
+                    });
+
+                    function getPaymentMethodName(value) {
+                        switch (value) {
+                            case "cod": return "Cash on Delivery";
+                            case "bkash": return "bKash";
+                            case "nagad": return "Nagad";
+                            case "rocket": return "Rocket";
+                            case "card": return "Debit/Credit Card";
+                            default: return "Unknown Method";
+                        }
+                    }
+                });
+
+// Add this to your existing script section in orderplace.html
+document.addEventListener('DOMContentLoaded', function() {
+    const cartData = JSON.parse(localStorage.getItem('currentCart') || '{}');
+    
+    // Update the proceed button click handler
+    document.querySelector('button').addEventListener('click', function(e) {
+        const selectedMethod = document.querySelector('input[name="payment"]:checked');
+        
+        if (selectedMethod) {
+            // Save the order
+            const newOrder = saveOrder(
+                cartData.items,
+                cartData.subtotal,
+                selectedMethod.value
+            );
+            
+            // Clear the cart data
+            localStorage.removeItem('currentCart');
+            
+            // Show success message and redirect
+            alert(`Order ${newOrder.id} has been placed successfully!`);
+            window.location.href = 'consumerDashboard.html';
+        } else {
+            alert('Please select a payment method before proceeding.');
+        }
+    });
+});
+            </script>
+
+        </div>
+    </div>
+
+    <script src="orderTracking.js"></script>
+</body>
+</html>

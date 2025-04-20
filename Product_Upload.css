@@ -1,0 +1,123 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    height: 100vh;
+    background-color: #f4f7fc;
+}
+
+.dashboard {
+    display: flex;
+    width: 100%;
+}
+
+.sidebar {
+    width: 250px;
+    height: 1000px;
+    background-color: #2c3e50;
+    padding: 20px;
+    color: #ecf0f1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.sidebar h2 {
+    text-align: center;
+    font-size: 22px;
+    color: #ecf0f1;
+}
+
+.menu {
+    list-style: none;
+}
+
+.menu li {
+    margin: 60px 0;
+}
+
+.menu li a {
+    text-decoration: none;
+    color: #ecf0f1;
+    font-size: 18px;
+    padding: 15px;
+    border-radius: 8px;
+    display: block;
+    transition: background 0.3s;
+}
+
+.menu li a i {
+    margin-right: 10px;
+}
+
+.menu li a:hover, .menu li a.active {
+    background-color: #34495e;
+}
+
+.product-upload {
+    background-color: #fff;
+    padding-left: 220px;
+    padding-right: 220px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+.product-upload h2 {
+    margin-top: 50px;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-upload form {
+    display: flex;
+    flex-direction: column;
+}
+
+.product-upload label {
+    margin-bottom: 15px;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.product-upload input, 
+.product-upload textarea {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-shadow: 0px 0px 7px rgb(9, 249, 209);
+}
+
+.product-upload input,
+.product-upload textarea:focus{
+    outline: none;
+}
+
+.product-upload button {
+    margin-top: 20px;
+    margin-left: 350px;
+    padding: 10px 15px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 15px;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    transition: background-color 0.3s;
+    width: 17%;
+}
+
+.product-upload button:hover {
+    background-color: #2980b9;
+}

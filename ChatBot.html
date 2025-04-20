@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="ChatBot.css">
+    <title>ChatBot</title>
+</head>
+<body>
+    <div class="chatbot-icon" onclick="toggleChatBox()">
+        <span class="message-icon">💬</span>
+    </div>
+
+    <div class="chat-support-container" id="chatSupportContainer" style="display: none;">
+        <div class="chat-header">
+            চ্যাট বক্স
+            <button class="close-btn" id="closeBtn">&times;</button>
+            <script>
+                document.getElementById('closeBtn').addEventListener('click', function() {
+                document.getElementById('chatSupportContainer').style.display = 'none';
+                });
+            </script>
+        </div>
+        <div class="chat-body" id="chatBody">
+            
+        </div>
+        <div class="chat-footer">
+            <input type="text" id="chatInput" placeholder="আপনার বার্তা লিখুন..." />
+            <button onclick="sendMessage()" style="padding: 10px;">পাঠান</button>
+        </div>
+    </div>
+
+    <script src="ChatBot.js"></script>
+</body>
+</html>
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Box</title>
+    <style>
+        /* Main Styles */
+        .chat-icon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: #3498db;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .chat-box {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 300px;
+            max-width: 100%;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            display: none;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            background-color: #3498db;
+            color: white;
+            padding: 10px;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-header .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .chat-messages {
+            padding: 10px;
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .chat-input {
+            border-top: 1px solid #ddd;
+            padding: 10px;
+        }
+
+        .chat-input input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+
+<div class="chat-icon" id="chatIcon">
+    💬
+</div>
+
+<div class="chat-box" id="chatBox">
+    <div class="chat-header">
+        চ্যাট বক্স
+        <button class="close-btn" id="closeBtn">&times;</button>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+        
+    </div>
+    <div class="chat-input">
+        <input type="text" id="chatInput" placeholder="মেসেজ লিখুন...">
+    </div>
+</div>
+
+<script>
+    document.getElementById('chatIcon').addEventListener('click', function() {
+        document.getElementById('chatBox').style.display = 'flex';
+    });
+
+    document.getElementById('closeBtn').addEventListener('click', function() {
+        document.getElementById('chatBox').style.display = 'none';
+    });
+
+    document.getElementById('chatInput').addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            const message = event.target.value;
+            if (message) {
+                const messageElem = document.createElement('div');
+                messageElem.textContent = message;
+                document.getElementById('chatMessages').appendChild(messageElem);
+                event.target.value = '';
+            }
+        }
+    });
+</script>
+
+</body>
+</html>  -->
+
+

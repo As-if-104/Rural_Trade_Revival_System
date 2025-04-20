@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rural Trade Review Section</title>
+    <link rel="stylesheet" href="Review.css">
+</head>
+<body>
+    <div class="review-section">
+        <h2>Customer Reviews</h2>
+        
+        <div class="review-form">
+            <h3>Leave a Review</h3>
+            <input type="text" id="name" placeholder="Your Name" style="font-family: 'Courier New', Courier, monospace;" required>
+            <input type="text" id="ID" placeholder="Product ID" style="font-family: 'Courier New', Courier, monospace;" required>
+    
+            <textarea id="comment" placeholder="Your Comment" rows="4" required style="font-family: 'Courier New', Courier, monospace;"></textarea>
+            
+            <label for="rating" style="font-family: 'Courier New', Courier, monospace; font-size: large;">Rating</label>
+            <select id="rate" class="rating" required style="font-family: 'Courier New', Courier, monospace;">
+                <option value="" disabled selected>Rate the product</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <button onclick="submitReview()">Submit</button>
+        </div>
+        
+        <div id="reviews" class="reviews-list">
+            <h3>What Our Users Say:</h3>
+        </div>
+    </div>
+
+    <script src="Review.js"></script>
+
+</body>
+</html>

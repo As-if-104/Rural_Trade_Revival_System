@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rural Trade Reviving System</title>
+    <link rel="stylesheet" href="Style.css">
+</head>
+<body>
+
+    <!-- Search Bar -->
+    <div class="search-container">
+        <input type="text" id="searchBar" placeholder="Search products...">
+        <button onclick="performSearch()">Search</button>
+    </div>
+
+    <!-- Search Results Page -->
+    <div id="searchResults" class="search-results hidden">
+        <!-- Filter Options -->
+        <div class="filters">
+            <label for="priceFilter">Filter by Price:</label>
+            <select id="priceFilter" onchange="applyFilters()">
+                <option value="all">All</option>
+                <option value="low">Low to High</option>
+                <option value="high">High to Low</option>
+            </select>
+
+            <label for="reviewFilter">Filter by Review:</label>
+            <select id="reviewFilter" onchange="applyFilters()">
+                <option value="all">All</option>
+                <option value="4star">4 Stars & Up</option>
+                <option value="3star">3 Stars & Up</option>
+            </select>
+        </div>
+
+        <!-- Product Listing -->
+        <div id="productList" class="product-list">
+            <!-- Products will be displayed here dynamically -->
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Order Details</h2>
+            <form id="orderForm">
+                <label>Order From:</label>
+                <input type="text" name="orderFrom" required>
+
+                <label>Order To:</label>
+                <input type="text" name="orderTo" required>
+
+                <label>Payment Method:</label>
+                <input type="text" name="paymentMethod" required>
+
+                <label>Send to:</label>
+                <input type="text" name="recipient" required>
+
+                <button type="submit" onclick="placeOrder()">Place Order</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

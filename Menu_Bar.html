@@ -1,0 +1,359 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+.header {
+    background-color: #2c3e50;
+    color: white;
+    padding: 0.5rem;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.menu-trigger {
+    color: white;
+    padding: 12px 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+}
+
+.sidebar {
+    height: 100vh;
+    width: 300px;
+    position: fixed;
+    top: 0;
+    left: -300px;
+    background-color: white;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease-in-out;
+    z-index: 999;
+    overflow-y: auto;
+}
+
+.sidebar.active {
+    transform: translateX(300px);
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    display: none;
+    z-index: 998;
+}
+
+.overlay.active {
+    display: block;
+}
+
+.menu-header {
+    background: #34495e;
+    color: white;
+    padding: 15px;
+    font-weight: bold;
+}
+
+.menu-section {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.menu-section h3 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+}
+
+.menu-section ul {
+    list-style: none;
+}
+
+.menu-section li a {
+    color: #444;
+    text-decoration: none;
+    display: block;
+    padding: 8px 0;
+    font-size: 0.9em;
+    transition: color 0.3s;
+}
+
+.menu-section li a:hover {
+    color: #27ae60;
+}
+
+.sub-menu-content {
+    padding-left: 20px;
+    display: none;
+}
+
+.sub-menu.active .sub-menu-content {
+    display: block;
+}
+
+.sub-menu > a::after {
+    content: '▸';
+    float: right;
+    transition: transform 0.3s;
+}
+
+.sub-menu.active > a::after {
+    transform: rotate(90deg);
+}
+
+/* Animation for menu items */
+.menu-section li {
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: all 0.3s ease-out;
+}
+
+.sidebar.active .menu-section li {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 0.2s;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        left: -100%;
+    }
+    
+    .sidebar.active {
+        transform: translateX(100%);
+    }
+}
+</style>
+</head>
+<body>
+    <header class="header">
+        <div class="menu-trigger">
+            ≡ All
+        </div>
+    </header>
+
+    <div class="overlay"></div>
+    
+    <nav class="sidebar">
+        <div class="menu-header">Rural Trade Categories</div>
+        
+        <div class="menu-section">
+            <h3>কৃষি পণ্য</h3>
+            <ul>
+                <li><a href="#">জৈব উৎপাদন</a></li>
+                <li><a href="#">শস্য ও দানাশস্য</a></li>
+                <li class="sub-menu">
+                    <a href="#">মৌসুমি ফসল</a>
+                    <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                    <div class="sub-menu-content">
+                        <ul>
+                            <li><a href="#">গ্রীষ্মকালীন ফসল</a></li>
+                            <li><a href="#">শীতকালীন ফসল</a></li>
+                            <li><a href="#">বর্ষাকালীন ফসল</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="menu-section">
+            <h3>হস্তশিল্প</h3>
+            <ul>
+                <li><a href="#">বস্ত্র</a></li>
+                <li><a href="#">মৃৎশিল্প</a></li>
+                <li class="sub-menu">
+                    <a href="#">ঐতিহ্যবাহী শিল্প</a>
+                    <div class="sub-menu-content">
+                        <ul>
+                            <li><a href="#">চিত্রকলা</a></li>
+                            <li><a href="#">ভাস্কর্য</a></li>
+                            <li><a href="#">বুনন শিল্প</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="menu-section">
+            <h3>স্থানীয় সেবা</h3>
+            <ul>
+                <li><a href="#">পরিবহন</a></li>
+                <li><a href="#">গুদাম সুবিধা</a></li>
+                <li><a href="#">বাজার সংযোগ</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <script>
+        const menuTrigger = document.querySelector('.menu-trigger');
+        const sidebar = document.querySelector('.sidebar');
+        const overlay = document.querySelector('.overlay');
+        const subMenus = document.querySelectorAll('.sub-menu');
+
+        menuTrigger.addEventListener('click', () => {
+            sidebar.classList.add('active');
+            overlay.classList.add('active');
+        });
+
+        overlay.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+
+        subMenus.forEach(menu => {
+            menu.addEventListener('click', (e) => {
+                if (e.target.tagName === 'A') {
+                    e.preventDefault();
+                    menu.classList.toggle('active');
+                }
+            });
+        });
+
+        // Add animation delay to menu items
+        const menuItems = document.querySelectorAll('.menu-section li');
+        menuItems.forEach((item, index) => {
+            item.style.transitionDelay = `${index * 0.1}s`;
+        });
+    </script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sliding Menu within Sliding Menu</title>
+    <style>
+      
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+        }
+
+        .main-menu {
+            width: 250px;
+            height: 100vh;
+            background-color: #333;
+            color: #fff;
+            overflow-y: auto;
+            position: relative;
+            transform: translateX(-250px);
+            transition: transform 0.3s ease;
+        }
+
+        .main-menu.open {
+            transform: translateX(0);
+        }
+
+        .main-menu h2 {
+            padding: 15px;
+            background-color: #444;
+            text-align: center;
+        }
+
+        .menu-item {
+            padding: 15px;
+            cursor: pointer;
+            background-color: #333;
+            border-bottom: 1px solid #444;
+            position: relative;
+        }
+
+        .menu-item:hover {
+            background-color: #444;
+        }
+
+        .submenu {
+            display: none;
+            background-color: #555;
+        }
+
+        .submenu.open {
+            display: block;
+        }
+
+        .submenu-item {
+            padding: 10px 30px;
+            cursor: pointer;
+            background-color: #555;
+            border-top: 1px solid #666;
+        }
+
+        .submenu-item:hover {
+            background-color: #666;
+        }
+
+        .toggle-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: #333;
+            color: #fff;
+            padding: 10px 15px;
+            cursor: pointer;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <button class="toggle-btn" onclick="toggleMenu()">☰ Menu</button>
+
+    <div class="main-menu" id="mainMenu">
+        <h2>Main Menu</h2>
+        
+        <div class="menu-item" onclick="toggleSubmenu('farmingSubmenu')">Farming</div>
+        <div class="submenu" id="farmingSubmenu">
+            <div class="submenu-item">Crops</div>
+            <div class="submenu-item">Vegetables</div>
+            <div class="submenu-item">Grains</div>
+        </div>
+
+        <div class="menu-item" onclick="toggleSubmenu('fisheriesSubmenu')">Fisheries</div>
+        <div class="submenu" id="fisheriesSubmenu">
+            <div class="submenu-item">Freshwater</div>
+            <div class="submenu-item">Saltwater</div>
+        </div>
+
+        <div class="menu-item" onclick="toggleSubmenu('cottageSubmenu')">Cottage Industries</div>
+        <div class="submenu" id="cottageSubmenu">
+            <div class="submenu-item">Handicrafts</div>
+            <div class="submenu-item">Textiles</div>
+            <div class="submenu-item">Pottery</div>
+        </div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById("mainMenu").classList.toggle("open");
+        }
+
+        function toggleSubmenu(submenuId) {
+            document.getElementById(submenuId).classList.toggle("open");
+        }
+    </script>
+
+</body>
+</html>

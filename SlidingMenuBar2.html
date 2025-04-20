@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Sidebar Menu</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Previous styles remain the same until sidebar background */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #f0f2f5;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 300px;
+            height: 100vh;
+            background: linear-gradient(145deg, #1a1c20 0%, #2d3436 100%);
+            overflow: hidden;
+            box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .menu {
+            position: absolute;
+            top: 0;
+            left: -300px;
+            width: 300px;
+            height: 100%;
+            padding: 20px;
+            background: inherit;
+            transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .menu.active {
+            left: 0;
+        }
+
+        .menu-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .menu-title {
+            color: #fff;
+            font-size: 22px;
+            font-weight: 600;
+            margin: 0;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .menu-icon {
+            margin-right: 12px;
+            color: #3498db;
+            font-size: 24px;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            cursor: pointer;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.05);
+            margin-bottom: 10px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-item:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .menu-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        .menu-item:hover:before {
+            background: #3498db;
+        }
+
+        /* Different colors for different sections */
+        .agricultural .menu-item:hover:before { background: #27ae60; }
+        .meat .menu-item:hover:before { background: #e74c3c; }
+        .dairy .menu-item:hover:before { background: #f1c40f; }
+        .handicraft .menu-item:hover:before { background: #9b59b6; }
+
+        .menu-item i {
+            margin-right: 12px;
+            font-size: 18px;
+            width: 24px;
+            text-align: center;
+        }
+
+        .menu-item .label {
+            flex-grow: 1;
+        }
+
+        .menu-item .arrow {
+            margin-left: 10px;
+            font-size: 14px;
+            opacity: 0.7;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            color: #3498db;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(52, 152, 219, 0.1);
+        }
+
+        .back-btn i {
+            margin-right: 10px;
+        }
+
+        /* Link styles */
+        .menu-item.link {
+            text-decoration: none;
+            position: relative;
+            padding-right: 40px;
+        }
+
+        .menu-item.link:after {
+            content: '\f0c1';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            right: 15px;
+            font-size: 14px;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .menu-item.link:hover:after {
+            opacity: 0.7;
+        }
+
+        /* Badge for new items */
+        .badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #e74c3c;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        /* Count badge */
+        .count {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-left: 8px;
+        }
+
+        /* Tooltip */
+        .tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        .menu-item:hover .tooltip {
+            opacity: 1;
+            bottom: -25px;
+        }
+
+        /* New theme toggle styles */
+        .theme-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .theme-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #2f3640;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #4cd137;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        /* Settings specific styles */
+        .settings-group {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .settings-title {
+            color: #dcdde1;
+            font-size: 14px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .settings-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+            color: #f5f6fa;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .settings-item:last-child {
+            border-bottom: none;
+        }
+
+        /* User profile styles */
+        .user-profile {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #4cd137;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            color: white;
+            font-weight: bold;
+        }
+
+        .user-info {
+            flex-grow: 1;
+        }
+
+        .user-name {
+            color: white;
+            font-weight: 500;
+        }
+
+        .user-status {
+            color: #dcdde1;
+            font-size: 12px;
+        }
+
+        /* Notification styles */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            background: #4cd137;
+            color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transform: translateX(200%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        /* Search bar styles */
+        .search-bar {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 12px 40px 12px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 14px;
+        }
+
+        .search-bar input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .search-bar i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Previous styles continue... */
+
+    </style>
+</head>
+<body>
+    <!-- Notification element -->
+    <div class="notification" id="notification">Settings saved successfully!</div>
+
+    <div class="sidebar">
+        <!-- Main Menu -->
+        <div class="menu active" id="main-menu">
+            <div class="menu-header">
+                <i class="fas fa-th-large menu-icon"></i>
+                <h2 class="menu-title">Main Menu</h2>
+            </div>
+            <div class="menu-item" onclick="showMenu('agricultural-menu')">
+                <i class="fas fa-seedling"></i>
+                <span class="label">Agricultural Products</span>
+                <span class="count">12</span>
+                <i class="fas fa-chevron-right arrow"></i>
+            </div>
+            <div class="menu-item" onclick="showMenu('handicraft-menu')">
+                <i class="fas fa-paint-brush"></i>
+                <span class="label">Handicraft Products</span>
+                <span class="badge">New</span>
+                <i class="fas fa-chevron-right arrow"></i>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-cog"></i>
+                <span class="label">Settings</span>
+                <i class="fas fa-chevron-right arrow"></i>
+            </div>
+        </div>
+
+        <!-- Agricultural Products Menu -->
+        <div class="menu agricultural" id="agricultural-menu">
+            <div class="back-btn" onclick="goBack('agricultural-menu')">
+                <i class="fas fa-arrow-left"></i>
+                Back to Main Menu
+            </div>
+            <div class="menu-header">
+                <i class="fas fa-seedling menu-icon"></i>
+                <h2 class="menu-title">Agricultural Products</h2>
+            </div>
+            <div class="menu-item" onclick="showMenu('seasonal-menu')">
+                <i class="fas fa-calendar-alt"></i>
+                <span class="label">Seasonal Crops and Fruit</span>
+                <span class="count">8</span>
+                <i class="fas fa-chevron-right arrow"></i>
+            </div>
+            <div class="menu-item" onclick="showMenu('meat-menu')">
+                <i class="fas fa-drumstick-bite"></i>
+                <span class="label">Fresh Meat and Fisheries</span>
+                <span class="badge">Sale</span>
+                <i class="fas fa-chevron-right arrow"></i>
+            </div>
+            <div class="menu-item" onclick="showMenu('dairy-menu')">
+                <i class="fas fa-egg"></i>
+                <span class="label">Dairy & Eggs</span>
+                <i class="fas fa-chevron-right arrow"></i>
+            </div>
+        </div>
+
+        <!-- Seasonal Crops Menu -->
+        <div class="menu" id="seasonal-menu">
+            <div class="back-btn" onclick="goBack('seasonal-menu')">
+                <i class="fas fa-arrow-left"></i>
+                Back to Agricultural
+            </div>
+            <div class="menu-header">
+                <i class="fas fa-calendar-alt menu-icon"></i>
+                <h2 class="menu-title">Seasonal Crops</h2>
+            </div>
+            <a href="#" class="menu-item link">
+                <i class="fas fa-cloud-rain"></i>
+                <span class="label">Rainy Crops</span>
+                <span class="tooltip">View rainy season crops</span>
+            </a>
+            <a href="#" class="menu-item link">
+                <i class="fas fa-sun"></i>
+                <span class="label">Summer Crops</span>
+                <span class="badge">Hot</span>
+            </a>
+            <a href="#" class="menu-item link">
+                <i class="fas fa-snowflake"></i>
+                <span class="label">Winter Crops</span>
+            </a>
+            <a href="#" class="menu-item link">
+                <i class="fas fa-apple-alt"></i>
+                <span class="label">Fresh Fruits</span>
+                <span class="count">15</span>
+            </a>
+        </div>
+
+        <!-- Meat Menu -->
+        <div class="menu meat" id="meat-menu">
+            <div class="back-btn" onclick="goBack('meat-menu')">
+                <i class="fas fa-arrow-left"></i>
+                Back to Agricultural
+            </div>
+            <div class="menu-header">
+                <i class="fas fa-drumstick-bite menu-icon"></i>
+                <h2 class="menu-title">Meat & Fisheries</h2>
+            </div>
+            <a href="#" class="menu-item link">
+                <i class="fas fa-kiwi-bird"></i>
+                <span class="label">Chicken & Poultry</span>
+            </a>
+            <a href="#" class="menu-item link">
+                <i class="fas fa-bacon"></i>
+                <span class="label">Fresh Meat</span>
+                <span class="badge">Fresh</span>
+            </a>
+            <a href="#" class="menu-item link">
+                <i class="fas fa-fish"></i>
+                <span class="label">Fresh Fish</span>
+            </a>
+        </div>
+
+        <!-- Dairy Menu -->
+        <div class="menu dairy" id="dairy-menu">
+            <div class="back-btn" onclick="goBack('dairy-menu')">
+                <i class="fas fa-arrow-left"></i>
+                Back to Agricultural
+            </div>
+            <div class="menu-header">
+                <i class="fas fa-egg menu-icon"></i>
+                <h2 class="menu-title">Dairy & Eggs</h2>
+            </div>
+            <a href="#" class="menu-item link">
+                <i class="fas fa-egg"></i>
+                <span class="label">Eggs</span>
+                <span class="badge">Organic</span>
+            </a>
+            <a href="#" class="menu-item link">
+                <i class="fas fa-glass-milk"></i>
+                <span class="label">Condensed Milk</span>
+            </a>
+        </div>
+
+        <!-- Handicraft Menu -->
+        <div class="menu handicraft" id="handicraft-menu">
+            <div class="back-btn" onclick="goBack('handicraft-menu')">
+                <i class="fas fa-arrow-left"></i>
+                Back to Main Menu
+            </div>
+            <div class="menu-header">
+                <i class="fas fa-paint-brush menu-icon"></i>
+                <h2 class="menu-title">Handicraft Products</h2>
+            </div>
+            <a href="#" class="menu-item link">
+                <i class="fas fa-tshirt"></i>
+                <span class="label">Textiles</span>
+                <span class="badge">Sale</span>
+            </a>
+            <a href="#" class="menu-item link">
+                <i class="fas fa-shapes"></i>
+                <span class="label">Pottery</span>
+            </a>
+        </div>
+
+        <!-- Settings Menu -->
+        <div class="menu" id="settings-menu">
+            <div class="back-btn" onclick="goBack('settings-menu')">
+                <i class="fas fa-arrow-left"></i>
+                Back to Main Menu
+            </div>
+            <div class="menu-header">
+                <i class="fas fa-cog menu-icon"></i>
+                <h2 class="menu-title">Settings</h2>
+            </div>
+
+            <!-- User Profile Section -->
+            <div class="user-profile">
+                <div class="user-avatar">JD</div>
+                <div class="user-info">
+                    <div class="user-name">John Doe</div>
+                    <div class="user-status">Admin</div>
+                </div>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="search-bar">
+                <input type="text" placeholder="Search settings...">
+                <i class="fas fa-search"></i>
+            </div>
+
+            <!-- Appearance Settings -->
+            <div class="settings-group">
+                <div class="settings-title">Appearance</div>
+                <div class="settings-item">
+                    <span>Dark Mode</span>
+                    <label class="theme-switch">
+                        <input type="checkbox" id="themeToggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="settings-item">
+                    <span>Compact Mode</span>
+                    <label class="theme-switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Notification Settings -->
+            <div class="settings-group">
+                <div class="settings-title">Notifications</div>
+                <div class="settings-item">
+                    <span>Email Alerts</span>
+                    <label class="theme-switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="settings-item">
+                    <span>Push Notifications</span>
+                    <label class="theme-switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Privacy Settings -->
+            <div class="settings-group">
+                <div class="settings-title">Privacy</div>
+                <div class="settings-item">
+                    <span>Profile Visibility</span>
+                    <label class="theme-switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="settings-item">
+                    <span>Activity Status</span>
+                    <label class="theme-switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Previous script remains the same, add these new functions: -->
+        <script>
+            // Previous JavaScript remains, add these new functions:
+            const menuHistory = ['main-menu'];
+
+        function showMenu(menuId) {
+            // Hide current menu
+            document.querySelector('.menu.active').classList.remove('active');
+            
+            // Show new menu
+            document.getElementById(menuId).classList.add('active');
+            
+            // Add to history
+            menuHistory.push(menuId);
+        }
+
+        function goBack(currentMenuId) {
+            if (menuHistory.length > 1) {
+                // Remove current menu from history
+                menuHistory.pop();
+                
+                // Hide current menu
+                document.getElementById(currentMenuId).classList.remove('active');
+                
+                // Show previous menu
+                const previousMenuId = menuHistory[menuHistory.length - 1];
+                document.getElementById(previousMenuId).classList.add('active');
+            }
+        }
+
+            // Theme toggle functionality
+            document.getElementById('themeToggle').addEventListener('change', function() {
+                document.body.classList.toggle('dark-mode');
+                showNotification('Theme updated!');
+            });
+
+            // Show notification
+            function showNotification(message) {
+                const notification = document.getElementById('notification');
+                notification.textContent = message;
+                notification.classList.add('show');
+                
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 3000);
+            }
+
+            // Modify the main menu settings click handler
+            document.querySelector('#main-menu .menu-item:last-child').onclick = function() {
+                showMenu('settings-menu');
+            };
+
+            // Search functionality
+            const searchInput = document.querySelector('.search-bar input');
+            searchInput.addEventListener('input', function(e) {
+                const searchTerm = e.target.value.toLowerCase();
+                const settingsItems = document.querySelectorAll('.settings-item');
+                
+                settingsItems.forEach(item => {
+                    const text = item.querySelector('span').textContent.toLowerCase();
+                    if(text.includes(searchTerm)) {
+                        item.style.display = 'flex';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        </script>
+    </div>
+</body>
+</html>

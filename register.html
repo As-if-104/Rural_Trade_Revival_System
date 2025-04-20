@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="register.css">
+    <link rel="icon" type="image/jpg" href="Images/Diamond.jpg">
+    <title>DirectMart Sign Up</title>
+</head>
+<body>
+    <div class="form-box register" id="click">
+        <form action="#">
+            <h2>Sign Up, Now!</h2>
+            <h4>We are happy to have you with us.</h4>
+            <div class="input-box">
+                <span class="icon">
+                    <i class="fa-solid fa-user"></i>
+                </span>
+                <input type="text" maxlength="30" required>
+                <label>First Name: </label>
+            </div>
+            <div class="input-box">
+                <span class="icon">
+                    <i class="fa-solid fa-user"></i>
+                </span>
+                <input type="text" maxlength="30" required>
+                <label>Middle Name: </label>
+            </div>
+            <div class="input-box">
+                <span class="icon">
+                    <i class="fa-solid fa-user"></i>
+                </span>
+                <input type="text" maxlength="30" required>
+                <label>Last Name: </label>
+            </div>
+            <div class="input-box">
+                <span class="icon">
+                    <i class="fa-solid fa-user"></i>
+                </span>
+                <input type="text" maxlength="30" required>
+                <label>Username: </label>
+            </div>
+            <div class="input-box">
+                <span class="icon">
+                    <i class="fa-solid fa-person"></i>
+                </span>
+                <input type="text" maxlength="30" required>
+                <label>Father's Name: </label>
+            </div>
+            <div class="input-box">
+                <span class="icon">
+                    <i class="fa-solid fa-person-dress"></i>
+                </span>
+                <input type="text" maxlength="30" required>
+                <label>Mother's Name: </label>
+            </div>
+            <div class="input-box">
+                <span class="icon">
+                    <i class="fa-solid fa-phone"></i>
+                </span>
+                <input type="tel" maxlength="11" required>
+                <label>Phone Number: </label>
+                <small style="font-family: 'Times New Roman', Times, serif; margin-left: 190px;">Format: 01619-827526</small> 
+            </div>
+            <div class="input-box">
+                <span class="icon">
+                    <i class="fa-solid fa-envelope"></i>
+                </span>
+                <input type="email" required>
+                <label>Email: </label>
+            </div>
+
+            <div class="input-box">
+                <span class="icon">
+                    <i class="fa-solid fa-lock"></i>
+                </span>
+                <input type="password" id="password" class="password-input" required>
+                <label>Password:</label>
+                <span class="toggle-password" onclick="togglePassword()" style="cursor: pointer; margin-left: 94%;">👁️</span>
+            </div>
+            <script>
+                function togglePassword() {
+                    const passwordInput = document.getElementById('password');
+                    const toggleButton = document.querySelector('.toggle-password');
+
+                    if (passwordInput.type == 'password') {
+                        passwordInput.type = 'text';
+                        toggleButton.textContent = '👁️‍🗨️';
+                    } else {
+                        passwordInput.type = 'password';
+                        toggleButton.textContent = '👁️';
+                    }
+                }
+            </script>
+            <div class="input-box">
+                <span class="icon">
+                    <i class="fa-solid fa-lock"></i>
+                </span>
+                <input type="password" id="password" class="password-input" required>
+                <label>Confirm Password:</label>
+                <span class="toggle-password" onclick="togglePassword()" style="cursor: pointer; margin-left: 94%;">👁️</span>
+            </div>
+            <script>
+                function togglePassword() {
+                    const passwordInput = document.getElementById('password');
+                    const toggleButton = document.querySelector('.toggle-password');
+
+                    if (passwordInput.type == 'password') {
+                        passwordInput.type = 'text';
+                        toggleButton.textContent = '👁️‍🗨️';
+                    } else {
+                        passwordInput.type = 'password';
+                        toggleButton.textContent = '👁️';
+                    }
+                }
+            </script>
+
+            <div class="check-NID" style="font-family: 'Times New Roman', Times, serif;">
+                <label for="NID"> Do you have an NID? </label>
+                <input type="checkbox" id="NID" required>
+            </div>
+            <div class="input-box">
+                <span class="icon">
+                    <i class="fa-brands fa-openid"></i>
+                </span>
+                <input type="text" required>
+                <label>NID: </label>
+            </div>
+            <br /> <br />
+            <div class="form-group">
+                <i class="fa-solid fa-globe"></i>
+                <label for="country">Country:</label>
+                <select id="country" name="country" required>
+                    <option value="" disabled selected>Select your country</option>
+                    <option value="Bangladesh">Bangladesh</option>
+                    <option value="India">India</option>
+                    <option value="Pakistan">Pakistan</option>
+                    <option value="USA">United States</option>
+                    <option value="UK">United Kingdom</option>
+                </select>
+            </div>
+            <br>
+            <div class="form-group">
+                <i class="fa-regular fa-flag"></i>
+                <label for="nationality">Nationality:</label>
+                <select id="nationality" name="nationality" required>
+                    <option value="" disabled selected>Select your nationality</option>
+                    <option value="Bangladeshi">Bangladeshi</option>
+                    <option value="Indian">Indian</option>
+                    <option value="Pakistani">Pakistani</option>
+                    <option value="American">American</option>
+                    <option value="British">British</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <br>
+            
+            <div class="gender" style="font-family: 'Times New Roman', Times, serif; font-size: 18px;">
+                <span>
+                    <i class="fa-solid fa-fingerprint" style="margin-right: 8px;"></i>
+                </span>
+                <label>Gender:</label>
+                <input type="radio" id="male" name="gender" value="Male" required />
+                <label for="male">Male</label>
+
+                <input type="radio" id="female" name="gender" value="Female" />
+                <label for="female">Female</label>
+
+                <input type="radio" id="other" name="gender" value="Other" />
+                <label for="other">Other</label>
+            </div>
+
+            <div class="gender" style="font-family: 'Times New Roman', Times, serif; font-size: 18px;">
+                <span>
+                    <i class="fa-solid fa-fingerprint" style="margin-right: 8px;"></i>
+                </span>
+                <label>Work as a:</label>
+                <input type="radio" id="male" name="gender" value="Male" required />
+                <label for="male">Seller</label>
+
+                <input type="radio" id="female" name="gender" value="Female" />
+                <label for="female">Consumer</label>
+
+                <input type="radio" id="other" name="gender" value="Other" />
+                <label for="other">Admin</label>
+            </div>
+
+            <br/> <br>
+
+            <div class="form-group">
+                <span>
+                    <i class="fa-solid fa-place-of-worship"></i>
+                </span>
+                <label for="religion">Religion:</label>
+                <select id="religion" name="religion" required>
+                    <option value="" disabled selected>Select your religion</option>
+                    <option value="Islam">Islam</option>
+                    <option value="Hinduism">Hinduism</option>
+                    <option value="Christianity">Christianity</option>
+                    <option value="Buddhism">Buddhism</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <br/>
+
+            <div class="birth">
+                <span>
+                    <i class="fa-solid fa-calendar-day birth" style="color: black;"></i>
+                </span>
+                <label class="dateOfBirth" for="dob">Date of Birth:</label>
+                <input type="date" id="dob" name="dob" required />
+            </div>
+            
+            <br>
+            
+            <div class="input-box">
+                <span class="icon">
+                    <i class="fa-solid fa-building-columns"></i>
+                </span>
+                <input type="text" id="occupation" name="occupation"required />
+                <label for="occupation">Occupation:</label>
+            </div>
+            <div class="input-box">
+                <span class="icon">
+                    <i class="fa-solid fa-address-book"></i>
+                </span>
+                <input type="text" id="street" name="street" required />
+                <label for="street">Street Address:</label>   
+            </div>
+
+            <div class="input-box">
+                <span class="icon">
+                    <i class="fa-solid fa-city"></i>
+                </span>
+                <input type="text" id="city" name="city" required />
+                <label for="city">City:</label>
+            </div>
+
+            <div class="input-box">
+                <span class="icon">
+                    <i class="fa-solid fa-usps"></i>
+                </span>
+                <input type="text" id="state" name="state" required />
+                <label for="state">State:</label>
+            </div>
+
+            <div class="input-box">
+                <span class="icon">
+                    <i class="fa-solid fa-address-card"></i>
+                </span>
+                <input type="text" id="zip" name="zip" required />
+                <label for="zip">Zip Code:</label>
+            </div>
+
+            <div class="agreed">
+                <label><input type="checkbox">I agree to the terms and conditions</label>
+            </div>
+
+            <a href="DirectMart.html" style="text-decoration: none; color: white;">
+            <button type="submit" class="btn">Sign Up
+            </a>
+            </buttom>
+            <div class="account">
+                <p>Already have an account?
+                <a href="LogIn.html" class="logIn">Sign In</a>
+                </p>
+            </div>
+        </form>
+    </div>
+
+    <!-- <script src="DirectMart.js"></script> -->
+</body>
+</html>
